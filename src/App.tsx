@@ -87,15 +87,24 @@ export default function App() {
     const saved = localStorage.getItem('buku_ajaib_active_session');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Purge deleted demo account if found in localStorage
+        if (
+          parsed.username === 'admin' ||
+          parsed.username === 'admin@bukuajaib.id' ||
+          parsed.id === 'usr_admin_default'
+        ) {
+          localStorage.removeItem('buku_ajaib_active_session');
+        } else if (parsed.isLoggedIn) {
+          return parsed;
+        }
       } catch (e) {
         console.error('Failed to load saved user session', e);
       }
     }
     return {
       ...initialUserSession,
-      id: 'usr_admin_default',
-      isLoggedIn: true,
+      isLoggedIn: false,
     };
   });
 

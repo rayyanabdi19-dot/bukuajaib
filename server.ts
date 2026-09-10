@@ -62,45 +62,36 @@ function loadDatabase(): DatabaseSchema {
   try {
     if (fs.existsSync(DB_FILE)) {
       const content = fs.readFileSync(DB_FILE, 'utf-8');
-      return JSON.parse(content);
+      const parsed: DatabaseSchema = JSON.parse(content);
+      // Ensure demo accounts are permanently deleted
+      let changed = false;
+      if (parsed.users) {
+        if (parsed.users['admin']) {
+          delete parsed.users['admin'];
+          changed = true;
+        }
+        if (parsed.users['admin@bukuajaib.id']) {
+          delete parsed.users['admin@bukuajaib.id'];
+          changed = true;
+        }
+      }
+      if (parsed.userData && parsed.userData[DEFAULT_ADMIN_ID]) {
+        delete parsed.userData[DEFAULT_ADMIN_ID];
+        changed = true;
+      }
+      if (changed) {
+        saveDatabase(parsed);
+      }
+      return parsed;
     }
   } catch (err) {
     console.error('Error loading db.json, creating new', err);
   }
 
-  // Create default admin user
+  // Clean empty database without demo accounts
   const initialDb: DatabaseSchema = {
-    users: {
-      'admin@bukuajaib.id': {
-        id: DEFAULT_ADMIN_ID,
-        username: 'admin@bukuajaib.id',
-        email: 'admin@bukuajaib.id',
-        password: 'password123',
-        name: 'Admin Pernikahan',
-        phone: '0812-3456-7890',
-        role: 'admin',
-        createdAt: new Date().toISOString(),
-      },
-      admin: {
-        id: DEFAULT_ADMIN_ID,
-        username: 'admin',
-        email: 'admin@bukuajaib.id',
-        password: 'password123',
-        name: 'Admin Pernikahan',
-        phone: '0812-3456-7890',
-        role: 'admin',
-        createdAt: new Date().toISOString(),
-      },
-    },
-    userData: {
-      [DEFAULT_ADMIN_ID]: {
-        eventInfo: initialEvent,
-        guests: [],
-        logs: [],
-        updatedAt: new Date().toISOString(),
-        revision: 1,
-      },
-    },
+    users: {},
+    userData: {},
   };
 
   saveDatabase(initialDb);

@@ -347,13 +347,13 @@ export const INITIAL_LOGS: ActivityLog[] = [
 ];
 
 export const INITIAL_USER: UserSession = {
-  isLoggedIn: true, // Default to logged in so reviewer immediately sees the full real application as requested!
-  username: 'admin@bukuajaib.id',
-  name: 'Admin Pernikahan',
-  email: 'admin@bukuajaib.id',
+  isLoggedIn: false,
+  username: '',
+  name: '',
+  email: '',
   role: 'admin',
-  desk: 'Meja Registrasi 1 & 2 Terhubung',
-  loginAt: '2026-09-20 17:30 WIB',
+  desk: 'Meja Utama VIP',
+  loginAt: '',
 };
 
 export const initialGuests = INITIAL_GUESTS;

@@ -58,6 +58,7 @@ export interface UserSession {
   username: string;
   name: string;
   email: string;
+  phone?: string;
   role: UserRole;
   desk: string;
   loginAt: string;

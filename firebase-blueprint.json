@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile in the application",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["admin", "receptionist"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "email", "name", "role"]
+    },
+    "WeddingEvent": {
+      "title": "WeddingEvent",
+      "description": "Wedding event master configuration and details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "ownerId": { "type": "string", "maxLength": 128 },
+        "coupleTitle": { "type": "string", "maxLength": 100 },
+        "fullTitle": { "type": "string", "maxLength": 150 },
+        "groomName": { "type": "string", "maxLength": 100 },
+        "brideName": { "type": "string", "maxLength": 100 },
+        "dateStr": { "type": "string", "maxLength": 60 },
+        "timeStr": { "type": "string", "maxLength": 60 },
+        "location": { "type": "string", "maxLength": 150 },
+        "hall": { "type": "string", "maxLength": 100 },
+        "targetGuests": { "type": "number" },
+        "souvenirStock": { "type": "number" },
+        "version": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "ownerId", "coupleTitle", "groomName", "brideName"]
+    },
+    "Guest": {
+      "title": "Guest",
+      "description": "Guest record attending the wedding event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "numericId": { "type": "number" },
+        "name": { "type": "string", "maxLength": 100 },
+        "relation": { "type": "string", "maxLength": 100 },
+        "category": { "type": "string", "enum": ["VIP", "Keluarga", "Rekan Kerja", "Teman Sekolah", "Komunitas", "Umum"] },
+        "party": { "type": "string", "enum": ["laki", "perempuan"] },
+        "guestCount": { "type": "number" },
+        "checkInTime": { "type": "string", "maxLength": 30 },
+        "checkInDate": { "type": "string", "maxLength": 30 },
+        "desk": { "type": "string", "maxLength": 50 },
+        "officer": { "type": "string", "maxLength": 50 },
+        "hasEnvelope": { "type": "boolean" },
+        "envelopeCode": { "type": "string", "maxLength": 50 },
+        "envelopeAmount": { "type": "number" },
+        "envelopeStatus": { "type": "string", "enum": ["counted", "pending", "none"] },
+        "envelopeBox": { "type": "string", "enum": ["box_male", "box_female"] },
+        "souvenirGiven": { "type": "boolean" },
+        "souvenirCount": { "type": "number" },
+        "tableNumber": { "type": "string", "maxLength": 30 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "notes": { "type": "string", "maxLength": 300 }
+      },
+      "required": ["id", "name", "category", "party", "guestCount", "envelopeStatus"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Real-time activity audit log for receptionist and cashier actions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "time": { "type": "string", "maxLength": 30 },
+        "date": { "type": "string", "maxLength": 30 },
+        "officer": { "type": "string", "maxLength": 50 },
+        "type": { "type": "string", "enum": ["checkin", "envelope", "counted", "souvenir", "update", "export", "guest_checkin", "envelope_count"] },
+        "message": { "type": "string", "maxLength": 200 },
+        "detail": { "type": "string", "maxLength": 200 },
+        "color": { "type": "string", "enum": ["emerald", "amber", "rose", "primary", "neutral"] }
+      },
+      "required": ["id", "time", "type", "message", "color"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile records"
+    },
+    "/events/{eventId}": {
+      "schema": { "$ref": "#/entities/WeddingEvent" },
+      "description": "Master wedding events"
+    },
+    "/events/{eventId}/guests/{guestId}": {
+      "schema": { "$ref": "#/entities/Guest" },
+      "description": "Guests attending the specific wedding event"
+    },
+    "/events/{eventId}/logs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Activity logs for the wedding event"
+    }
+  }
+}

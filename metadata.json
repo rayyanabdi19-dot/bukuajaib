@@ -1,0 +1,6 @@
+{
+  "name": "Buku Ajaib",
+  "description": "Platform Buku Tamu Pernikahan Digital & Manajemen Kasir Amplop Resepsi Akurat dengan Mode Offline PWA",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

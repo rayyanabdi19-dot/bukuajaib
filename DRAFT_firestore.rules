@@ -1,0 +1,118 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened Primitives
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && (
+        request.auth.token.email_verified == true ||
+        request.auth.token.firebase.sign_in_provider == 'google.com'
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'rayyan.abdi19@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Validation Blueprint: UserProfile
+    function isValidUserProfile(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.email is string && data.email.size() <= 128 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.role in ['admin', 'receptionist'];
+    }
+
+    // Validation Blueprint: WeddingEvent
+    function isValidWeddingEvent(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.ownerId is string && data.ownerId.size() <= 128 &&
+             data.coupleTitle is string && data.coupleTitle.size() > 0 && data.coupleTitle.size() <= 100 &&
+             data.groomName is string && data.groomName.size() > 0 && data.groomName.size() <= 100 &&
+             data.brideName is string && data.brideName.size() > 0 && data.brideName.size() <= 100;
+    }
+
+    // Validation Blueprint: Guest
+    function isValidGuest(data) {
+      return data.id is string && data.id.size() <= 50 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.category in ['VIP', 'Keluarga', 'Rekan Kerja', 'Teman Sekolah', 'Komunitas', 'Umum'] &&
+             data.party in ['laki', 'perempuan'] &&
+             data.guestCount is number && data.guestCount >= 1 && data.guestCount <= 50 &&
+             data.envelopeStatus in ['counted', 'pending', 'none'] &&
+             data.envelopeAmount is number && data.envelopeAmount >= 0;
+    }
+
+    // Validation Blueprint: ActivityLog
+    function isValidActivityLog(data) {
+      return data.id is string && data.id.size() <= 50 &&
+             data.time is string && data.time.size() <= 30 &&
+             data.type in ['checkin', 'envelope', 'counted', 'souvenir', 'update', 'export', 'guest_checkin', 'envelope_count'] &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 200 &&
+             data.color in ['emerald', 'amber', 'rose', 'primary', 'neutral'];
+    }
+
+    // Collection: /users/{userId}
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUserProfile(incoming());
+      allow update: if (isOwner(userId) || isAdmin()) && isValidId(userId) && isValidUserProfile(incoming()) &&
+                       incoming().id == existing().id && incoming().email == existing().email;
+      allow delete: if isAdmin();
+    }
+
+    // Collection: /events/{eventId}
+    match /events/{eventId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn() && (resource.data.ownerId == request.auth.uid || isAdmin());
+      allow create: if isVerified() && isValidId(eventId) && isValidWeddingEvent(incoming()) && incoming().ownerId == request.auth.uid;
+      allow update: if (isAdmin() || (isSignedIn() && existing().ownerId == request.auth.uid)) &&
+                       isValidId(eventId) && isValidWeddingEvent(incoming()) && incoming().ownerId == existing().ownerId;
+      allow delete: if isAdmin() || (isSignedIn() && existing().ownerId == request.auth.uid);
+
+      // Subcollection: /events/{eventId}/guests/{guestId}
+      match /guests/{guestId} {
+        allow get, list: if isSignedIn() && exists(/databases/$(database)/documents/events/$(eventId));
+        allow create: if isVerified() && isValidId(guestId) && exists(/databases/$(database)/documents/events/$(eventId)) && isValidGuest(incoming());
+        allow update: if isVerified() && isValidId(guestId) && exists(/databases/$(database)/documents/events/$(eventId)) && isValidGuest(incoming());
+        allow delete: if isAdmin() || (isSignedIn() && get(/databases/$(database)/documents/events/$(eventId)).data.ownerId == request.auth.uid);
+      }
+
+      // Subcollection: /events/{eventId}/logs/{logId}
+      match /logs/{logId} {
+        allow get, list: if isSignedIn() && exists(/databases/$(database)/documents/events/$(eventId));
+        allow create: if isVerified() && isValidId(logId) && exists(/databases/$(database)/documents/events/$(eventId)) && isValidActivityLog(incoming());
+        allow update, delete: if isAdmin();
+      }
+    }
+  }
+}

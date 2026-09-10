@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <script>
+      (function() {
+        function isIgnoredLogMsg(arg) {
+          if (!arg) return false;
+          try {
+            var str = typeof arg === 'string'
+              ? arg
+              : (arg.message || arg.stack || (typeof arg.toString === 'function' ? arg.toString() : ''));
+            if (typeof str === 'string') {
+              if (
+                str.indexOf('[vite]') !== -1 ||
+                str.indexOf('failed to connect to websocket') !== -1 ||
+                str.indexOf('WebSocket') !== -1 ||
+                str.indexOf('@firebase/firestore') !== -1 ||
+                str.indexOf('Could not reach Cloud Firestore backend') !== -1
+              ) {
+                return true;
+              }
+            }
+          } catch (_) {}
+          return false;
+        }
+
+        var _origLog = console.log;
+        console.log = function() {
+          var args = Array.prototype.slice.call(arguments);
+          try {
+            if (args.some(isIgnoredLogMsg)) return;
+          } catch (_) {}
+          _origLog.apply(console, args);
+        };
+
+        var _origErr = console.error;
+        console.error = function() {
+          var args = Array.prototype.slice.call(arguments);
+          try {
+            if (args.some(isIgnoredLogMsg)) return;
+          } catch (_) {}
+          _origErr.apply(console, args);
+        };
+
+        var _origWarn = console.warn;
+        console.warn = function() {
+          var args = Array.prototype.slice.call(arguments);
+          try {
+            if (args.some(isIgnoredLogMsg)) return;
+          } catch (_) {}
+          _origWarn.apply(console, args);
+        };
+
+        var _origInfo = console.info;
+        console.info = function() {
+          var args = Array.prototype.slice.call(arguments);
+          try {
+            if (args.some(isIgnoredLogMsg)) return;
+          } catch (_) {}
+          _origInfo.apply(console, args);
+        };
+
+        var _origDebug = console.debug;
+        console.debug = function() {
+          var args = Array.prototype.slice.call(arguments);
+          try {
+            if (args.some(isIgnoredLogMsg)) return;
+          } catch (_) {}
+          _origDebug.apply(console, args);
+        };
+
+        window.addEventListener('error', function(e) {
+          try {
+            if (
+              e &&
+              (isIgnoredLogMsg(e.message) ||
+                isIgnoredLogMsg(e.error) ||
+                (e.filename && e.filename.indexOf('vite') !== -1))
+            ) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          } catch (_) {}
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          try {
+            if (
+              e &&
+              (isIgnoredLogMsg(e.reason) ||
+                (e.reason && (isIgnoredLogMsg(e.reason.message) || isIgnoredLogMsg(e.reason.stack))))
+            ) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          } catch (_) {}
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buku Ajaib - Buku Tamu Digital & Kasir Amplop Pernikahan</title>
+    <meta name="description" content="Platform Buku Tamu Digital & Kasir Amplop Resepsi Pernikahan Akurat dengan Mode Offline PWA dan Sinkronisasi Meja Registrasi." />
+    <meta property="og:title" content="Buku Ajaib - Buku Tamu Digital & Kasir Amplop Pernikahan" />
+    <meta property="og:description" content="Platform Buku Tamu Digital & Kasir Amplop Resepsi Pernikahan Akurat dengan Mode Offline PWA dan Sinkronisasi Meja Registrasi." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#6f4627" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Buku Ajaib" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#f9f9f8] text-[#1a1c1c] antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

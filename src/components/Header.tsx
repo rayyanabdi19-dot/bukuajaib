@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { UserSession, WeddingEventInfo } from '../types';
 import { 
   Heart, 
-  QrCode, 
   Bell, 
   UserCheck, 
   LogOut, 
@@ -34,7 +33,7 @@ interface HeaderProps {
   activeNav: string;
   setActiveNav: (nav: string) => void;
   onOpenReceptionModal: () => void;
-  onOpenQrModal: () => void;
+  onOpenQrModal?: () => void;
   onSwitchToPortal: () => void;
   onResetData: () => void;
   onOpenEventSettings?: () => void;
@@ -108,38 +107,38 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-white border-b border-[#d5c3b8] shadow-2xs sticky top-0 z-40">
+      <header className="glass-panel border-b border-white/80 sticky top-0 z-40 shadow-xs backdrop-blur-md bg-white/85">
         <div className="flex justify-between items-center w-full px-3 sm:px-4 md:px-6 max-w-[78rem] mx-auto h-16 gap-2 sm:gap-4">
           {/* Left: Hamburger Button & Brand Identity */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink">
             {/* Hamburger Button to Toggle Side Menu */}
             <button
               onClick={() => setSideMenuOpen((prev) => !prev)}
-              className="px-2.5 sm:px-3 py-1.5 -ml-1 text-[#51443c] hover:text-[#6f4627] hover:bg-[#faf6f2] rounded-xl transition-all border border-[#d5c3b8]/80 flex items-center gap-2 shrink-0 active:scale-95 shadow-2xs group cursor-pointer"
+              className="px-2.5 sm:px-3 py-1.5 -ml-1 text-purple-950 hover:text-purple-900 bg-white/80 hover:bg-white rounded-xl transition-all border border-purple-200/80 flex items-center gap-2 shrink-0 active:scale-95 shadow-2xs group cursor-pointer"
               aria-label={sideMenuOpen ? 'Tutup Menu Navigasi' : 'Buka Menu Navigasi'}
               title="Buka Menu Navigasi"
               type="button"
               id="hamburger-menu-btn"
             >
               {sideMenuOpen ? (
-                <X className="w-5 h-5 text-[#6f4627]" />
+                <X className="w-5 h-5 text-purple-900" />
               ) : (
-                <Menu className="w-5 h-5 text-[#6f4627] group-hover:scale-110 transition-transform" />
+                <Menu className="w-5 h-5 text-purple-900 group-hover:scale-110 transition-transform" />
               )}
-              <span className="text-xs font-bold text-[#6f4627]">
+              <span className="text-xs font-bold text-purple-950">
                 Menu
               </span>
             </button>
 
             {/* Wedding Brand Title */}
-            <div className="w-8 h-8 rounded-lg bg-[#8b5e3c]/10 flex items-center justify-center text-[#6f4627] shrink-0">
-              <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-[#6f4627]" />
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-xs">
+              <Heart className="w-4 h-4 fill-white" />
             </div>
             
             <div className="min-w-0 flex flex-col justify-center">
               <button 
                 onClick={() => handleNavSelect('dashboard')}
-                className="font-serif-luxury text-sm sm:text-base md:text-lg lg:text-xl text-[#6f4627] tracking-tight font-bold hover:opacity-85 transition-opacity truncate max-w-[130px] xs:max-w-[180px] sm:max-w-[220px] md:max-w-[280px] text-left leading-tight cursor-pointer"
+                className="font-serif-luxury text-sm sm:text-base md:text-lg lg:text-xl text-[#1e1b4b] tracking-tight font-bold hover:opacity-85 transition-opacity truncate max-w-[130px] xs:max-w-[180px] sm:max-w-[220px] md:max-w-[280px] text-left leading-tight cursor-pointer"
                 title={eventInfo.coupleTitle || 'Buku Ajaib Wedding'}
               >
                 {eventInfo.coupleTitle || 'Buku Ajaib Wedding'}
@@ -163,16 +162,6 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* In-App PWA Install Button */}
             <PWAInstallButton variant="header" />
-
-            {/* Barcode/QR Scanner Trigger */}
-            <button
-              onClick={onOpenQrModal}
-              className="p-1.5 sm:p-2 text-[#51443c] hover:bg-[#faf6f2] hover:text-[#6f4627] rounded-xl transition-all border border-[#d5c3b8]/70 shrink-0"
-              title="Buka Scanner Barcode / QR Undangan"
-              type="button"
-            >
-              <QrCode className="w-4 h-4 sm:w-5 sm:h-5 text-[#6f4627]" />
-            </button>
 
             {/* Notifications button */}
             <div className="relative shrink-0">
@@ -211,10 +200,10 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mode Penerima Tamu Switcher */}
             <button
               onClick={onOpenReceptionModal}
-              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-[#8b5e3c] text-white hover:bg-[#6f4627] rounded-xl text-xs font-bold shadow-2xs transition-all shrink-0 active:scale-95 whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 sm:py-2 bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all shrink-0 active:scale-95 whitespace-nowrap"
               type="button"
             >
-              <UserCheck className="w-4 h-4 text-[#ffe3d1] shrink-0" />
+              <UserCheck className="w-4 h-4 text-white shrink-0" />
               <span className="hidden md:inline">Mode </span>
               <span>Penerima Tamu</span>
             </button>
@@ -223,15 +212,15 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="relative shrink-0">
               <button
                 onClick={() => setProfileDropdown(!profileDropdown)}
-                className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 hover:bg-[#faf6f2] rounded-xl transition-all border border-[#d5c3b8]/70"
+                className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 hover:bg-purple-50/50 rounded-xl transition-all border border-purple-200/80 bg-white/70"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#ffe088] border border-[#735c00] flex items-center justify-center text-[#241a00] font-bold text-xs shrink-0">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 border border-purple-300 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-2xs">
                   {user.role === 'admin' ? 'AB' : 'PT'}
                 </div>
-                <span className="text-xs font-semibold text-[#1a1c1c] hidden lg:inline whitespace-nowrap">
+                <span className="text-xs font-semibold text-[#1e1b4b] hidden lg:inline whitespace-nowrap">
                   {user.role === 'admin' ? 'Admin' : 'Petugas'}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 text-[#51443c] hidden sm:block shrink-0" />
+                <ChevronDown className="w-3.5 h-3.5 text-gray-500 hidden sm:block shrink-0" />
               </button>
 
               {profileDropdown && (
@@ -319,15 +308,13 @@ export const Header: React.FC<HeaderProps> = ({
 
                     <button
                       onClick={() => {
-                        if (confirm('Kembalikan seluruh data tamu dan amplop ke sampel awal simulasi resepsi?')) {
-                          onResetData();
-                          setProfileDropdown(false);
-                        }
+                        onResetData();
+                        setProfileDropdown(false);
                       }}
-                      className="w-full text-left px-3 py-2 hover:bg-amber-50 text-amber-900 rounded-lg flex items-center gap-2 font-medium"
+                      className="w-full text-left px-3 py-2 hover:bg-red-50 text-red-900 rounded-lg flex items-center gap-2 font-medium"
                     >
-                      <RotateCcw className="w-4 h-4 text-amber-700" />
-                      <span>Reset Data ke Contoh Resepsi</span>
+                      <RotateCcw className="w-4 h-4 text-red-700" />
+                      <span>Kosongkan / Reset Data Tamu</span>
                     </button>
                   </div>
 
@@ -471,17 +458,6 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <UserCheck className="w-4 h-4 text-[#8b5e3c] shrink-0" />
                   <span>Mode Penerima Tamu Layar Meja</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    setSideMenuOpen(false);
-                    onOpenQrModal();
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 text-xs font-medium text-[#1a1c1c] hover:bg-[#faf6f2] rounded-xl transition-colors text-left"
-                >
-                  <QrCode className="w-4 h-4 text-[#8b5e3c] shrink-0" />
-                  <span>Scan Barcode / QR Undangan</span>
                 </button>
 
                 {onOpenClockCalendar && (

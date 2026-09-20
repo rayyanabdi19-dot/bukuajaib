@@ -46,7 +46,7 @@ const DEFAULT_RUNDOWN: Record<string, AgendaItem[]> = {
     { id: '3', time: '10:00 - 11:00', title: 'Prosesi Adat & Temu Manten', pic: 'Pemandu Adat', location: 'Pelaminan', completed: false },
     { id: '4', time: '11:00 - 14:00', title: 'Resepsi Sesi Siang (Keluarga Besar & Tamu VIP)', pic: 'Semua Panitia', location: 'Grand Ballroom', completed: false },
     { id: '5', time: '14:00 - 16:30', title: 'Istirahat Mempelai & Rekapitulasi Sesi 1', pic: 'Koordinator Kasir', location: 'Ruang VIP Panitia', completed: false },
-    { id: '6', time: '17:00 - 18:30', title: 'Persiapan Resepsi Sesi Malam & Souvenir', pic: 'Tim Souvenir & QR', location: 'Meja Penerima Tamu', completed: false },
+    { id: '6', time: '17:00 - 18:30', title: 'Persiapan Resepsi Sesi Malam & Souvenir', pic: 'Tim Meja Tamu & Souvenir', location: 'Meja Penerima Tamu', completed: false },
     { id: '7', time: '18:30 - 21:30', title: 'Resepsi Sesi Malam (Rekan Kerja, Alumni & Sahabat)', pic: 'Semua Tim Meja', location: 'Grand Ballroom', completed: false },
     { id: '8', time: '21:30 - 22:30', title: 'Penutupan Meja Tamu, Hitung Total Amplop & Serah Terima', pic: 'Saksi Kedua Pihak', location: 'Ruang Kasir Amplop', completed: false },
   ],
@@ -400,24 +400,24 @@ export const DigitalClockCalendarModal: React.FC<DigitalClockCalendarModalProps>
 
   // STANDARD MODAL VIEW (Jam Digital + Kalender Interaktif + Rundown Acara)
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 overflow-y-auto">
-      <div className="bg-white border border-[#d5c3b8] rounded-2xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1e1b4b]/40 backdrop-blur-md p-3 sm:p-4 overflow-y-auto">
+      <div className="glass-panel bg-white/95 border border-white/90 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         {/* Modal Header */}
-        <div className="bg-[#faf6f2] border-b border-[#d5c3b8] px-5 py-4 flex items-center justify-between shrink-0">
+        <div className="bg-gradient-to-r from-orange-500 via-orange-600 to-purple-600 border-b border-purple-100/80 px-5 py-4 flex items-center justify-between shrink-0 text-white shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#8b5e3c]/10 text-[#6f4627] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center backdrop-blur-xs shadow-2xs">
               <Clock className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-serif-luxury text-lg md:text-xl font-bold text-[#6f4627]">
+                <h3 className="font-serif-luxury text-lg md:text-xl font-bold text-white">
                   Jam Digital & Kalender Acara Resepsi
                 </h3>
-                <span className="text-[10px] bg-amber-100 text-amber-900 border border-amber-200 font-bold px-2 py-0.5 rounded-full">
+                <span className="text-[10px] bg-white/20 text-white border border-white/30 font-bold px-2 py-0.5 rounded-full backdrop-blur-xs">
                   Real-Time Live
                 </span>
               </div>
-              <p className="text-xs text-[#51443c]">
+              <p className="text-xs text-orange-100">
                 Sinkronisasi waktu presisi check-in meja registrasi dan kalender rundown pernikahan
               </p>
             </div>
@@ -426,7 +426,7 @@ export const DigitalClockCalendarModal: React.FC<DigitalClockCalendarModalProps>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsFullscreenClock(true)}
-              className="px-3 py-1.5 bg-white hover:bg-[#ede5df] text-[#6f4627] border border-[#d5c3b8] rounded-xl text-xs font-bold shadow-2xs transition-all flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-xl text-xs font-bold shadow-2xs transition-all flex items-center gap-1.5 backdrop-blur-xs"
               title="Layar Penuh Meja Resepsi"
             >
               <Maximize2 className="w-3.5 h-3.5" />
@@ -434,7 +434,7 @@ export const DigitalClockCalendarModal: React.FC<DigitalClockCalendarModalProps>
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-[#51443c] hover:text-[#1a1c1c] hover:bg-[#eeeeed] transition-colors"
+              className="p-2 rounded-xl text-white/80 hover:text-white hover:bg-white/20 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>

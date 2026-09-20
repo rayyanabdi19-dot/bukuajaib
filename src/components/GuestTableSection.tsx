@@ -75,9 +75,9 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
   const totalEnvelopes = guests.filter((g) => g.hasEnvelope).length;
 
   return (
-    <section className="bg-white rounded-xl border border-[#d5c3b8] shadow-sm overflow-hidden" id="buku-tamu">
+    <section className="glass-panel rounded-2xl border border-white/80 shadow-md overflow-hidden" id="buku-tamu">
       {/* Tab Header Switcher */}
-      <div className="border-b border-[#d5c3b8] px-4 md:px-6 pt-3 flex flex-wrap items-center justify-between gap-3">
+      <div className="border-b border-purple-100/70 px-4 md:px-6 pt-3 flex flex-wrap items-center justify-between gap-3 bg-white/40">
         <div className="flex items-center gap-4 sm:gap-6 overflow-x-auto custom-scrollbar">
           <button
             onClick={() => {
@@ -87,19 +87,19 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
             type="button"
             className={`relative py-3 px-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap transition-colors ${
               activeSubTab === 'buku-tamu' || activeSubTab === 'semua'
-                ? 'text-[#6f4627] font-bold'
-                : 'text-[#51443c] hover:text-[#6f4627]'
+                ? 'text-purple-950 font-bold'
+                : 'text-gray-600 hover:text-purple-900'
             }`}
           >
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4 text-purple-700" />
             <span>Buku Tamu</span>
-            <span className="px-2 py-0.5 bg-[#ffdcc5] text-[#301400] rounded-full text-xs font-bold">
+            <span className="px-2 py-0.5 bg-orange-100 text-orange-950 border border-orange-200/80 rounded-full text-xs font-bold">
               {guests.length}
             </span>
             {(activeSubTab === 'buku-tamu' || activeSubTab === 'semua') && (
               <motion.div
                 layoutId="guestSubTabActiveIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6f4627]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-purple-600"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -113,19 +113,19 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
             type="button"
             className={`relative py-3 px-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap transition-colors ${
               activeSubTab === 'amplop'
-                ? 'text-[#6f4627] font-bold'
-                : 'text-[#51443c] hover:text-[#6f4627]'
+                ? 'text-purple-950 font-bold'
+                : 'text-gray-600 hover:text-purple-900'
             }`}
           >
-            <Mail className="w-4 h-4" />
+            <Mail className="w-4 h-4 text-orange-600" />
             <span>Daftar Amplop</span>
-            <span className="px-2 py-0.5 bg-[#eeeeed] text-[#51443c] rounded-full text-xs font-bold">
+            <span className="px-2 py-0.5 bg-white/80 text-purple-950 border border-purple-200/80 rounded-full text-xs font-bold">
               {totalEnvelopes}
             </span>
             {activeSubTab === 'amplop' && (
               <motion.div
                 layoutId="guestSubTabActiveIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6f4627]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-purple-600"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -140,16 +140,16 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
             type="button"
             className={`relative py-3 px-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap transition-colors ${
               activeSubTab === 'rekap'
-                ? 'text-[#6f4627] font-bold'
-                : 'text-[#51443c] hover:text-[#6f4627]'
+                ? 'text-purple-950 font-bold'
+                : 'text-gray-600 hover:text-purple-900'
             }`}
           >
-            <FileSpreadsheet className="w-4 h-4" />
+            <FileSpreadsheet className="w-4 h-4 text-purple-700" />
             <span>Rekapitulasi</span>
             {activeSubTab === 'rekap' && (
               <motion.div
                 layoutId="guestSubTabActiveIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6f4627]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-purple-600"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -164,17 +164,17 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
             type="button"
             className={`relative py-3 px-2 text-sm font-semibold flex items-center gap-2 whitespace-nowrap transition-colors ${
               activeSubTab === 'log-aktivitas'
-                ? 'text-[#6f4627] font-bold'
-                : 'text-[#51443c] hover:text-[#6f4627]'
+                ? 'text-purple-950 font-bold'
+                : 'text-gray-600 hover:text-purple-900'
             }`}
           >
-            <Clock className="w-4 h-4" />
+            <Clock className="w-4 h-4 text-orange-600" />
             <span>Log Aktivitas</span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span className="w-2 h-2 rounded-full bg-orange-500"></span>
             {activeSubTab === 'log-aktivitas' && (
               <motion.div
                 layoutId="guestSubTabActiveIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6f4627]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-purple-600"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
@@ -182,12 +182,12 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
         </div>
 
         <div className="py-2 flex items-center gap-3">
-          <span className="text-xs text-[#51443c]">
+          <span className="text-xs text-gray-600 font-medium">
             Menampilkan {paginatedGuests.length} dari {filteredGuests.length} entri tamu
           </span>
           <button
             onClick={onOpenReceptionModal}
-            className="sm:hidden p-2 bg-[#8b5e3c] text-white rounded-lg"
+            className="sm:hidden p-2 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-xl shadow-xs"
             title="Tambah Tamu Cepat"
           >
             <Plus className="w-4 h-4" />
@@ -196,10 +196,10 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
       </div>
 
       {/* Filters and Search Toolbar */}
-      <div className="p-4 bg-[#f3f4f3] border-b border-[#d5c3b8]/60 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+      <div className="p-4 bg-purple-50/40 border-b border-purple-100/70 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
         {/* Search Input */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#83746b]" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
             value={searchTerm}
@@ -208,14 +208,14 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
               setCurrentPage(1);
             }}
             placeholder="Cari nama tamu, kode BT-xxx, atau nomor HP..."
-            className="w-full pl-9 pr-4 py-2 bg-white border border-[#d5c3b8] rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#735c00] text-[#1a1c1c] placeholder:text-[#83746b]"
+            className="w-full pl-9 pr-4 py-2 bg-white/85 border border-purple-200/80 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 text-[#1e1b4b] placeholder:text-gray-400 shadow-2xs"
           />
         </div>
 
         {/* Filter Dropdowns, View Switcher & Pills */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {/* View Mode Switcher (Tabel vs Kartu Grid) */}
-          <div className="flex items-center bg-white border border-[#d5c3b8] p-1 rounded-xl shadow-2xs">
+          <div className="flex items-center bg-white/80 border border-purple-200/80 p-1 rounded-xl shadow-2xs">
             <button
               type="button"
               onClick={() => {
@@ -224,8 +224,8 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
               }}
               className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                 viewMode === 'table'
-                  ? 'bg-[#6f4627] text-white shadow-2xs'
-                  : 'text-[#51443c] hover:bg-[#faf6f2]'
+                  ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-2xs'
+                  : 'text-gray-600 hover:bg-purple-50'
               }`}
               title="Tampilan Tabel Lengkap"
             >
@@ -240,8 +240,8 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
               }}
               className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
                 viewMode === 'grid'
-                  ? 'bg-[#6f4627] text-white shadow-2xs'
-                  : 'text-[#51443c] hover:bg-[#faf6f2]'
+                  ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-2xs'
+                  : 'text-gray-600 hover:bg-purple-50'
               }`}
               title="Tampilan Kartu Tamu"
             >
@@ -251,15 +251,15 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
           </div>
 
           {/* Filter Pihak */}
-          <div className="flex items-center gap-1.5 bg-white border border-[#d5c3b8] px-3 py-1.5 rounded-xl">
-            <span className="text-xs text-[#51443c] font-semibold">Pihak:</span>
+          <div className="flex items-center gap-1.5 bg-white/85 border border-purple-200/80 px-3 py-1.5 rounded-xl shadow-2xs">
+            <span className="text-xs text-purple-950 font-semibold">Pihak:</span>
             <select
               value={partyFilter}
               onChange={(e) => {
                 setPartyFilter(e.target.value as any);
                 setCurrentPage(1);
               }}
-              className="bg-transparent border-0 text-xs font-semibold text-[#1a1c1c] focus:ring-0 p-0 cursor-pointer"
+              className="bg-transparent border-0 text-xs font-bold text-[#1e1b4b] focus:ring-0 p-0 cursor-pointer"
             >
               <option value="all">Semua Pihak</option>
               <option value="laki">Pihak Laki-laki</option>
@@ -268,15 +268,15 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
           </div>
 
           {/* Filter Status Amplop */}
-          <div className="flex items-center gap-1.5 bg-white border border-[#d5c3b8] px-3 py-1.5 rounded-xl">
-            <span className="text-xs text-[#51443c] font-semibold">Status Amplop:</span>
+          <div className="flex items-center gap-1.5 bg-white/85 border border-purple-200/80 px-3 py-1.5 rounded-xl shadow-2xs">
+            <span className="text-xs text-purple-950 font-semibold">Status Amplop:</span>
             <select
               value={envelopeFilter}
               onChange={(e) => {
                 setEnvelopeFilter(e.target.value as any);
                 setCurrentPage(1);
               }}
-              className="bg-transparent border-0 text-xs font-semibold text-[#1a1c1c] focus:ring-0 p-0 cursor-pointer"
+              className="bg-transparent border-0 text-xs font-bold text-[#1e1b4b] focus:ring-0 p-0 cursor-pointer"
             >
               <option value="all">Semua Amplop</option>
               <option value="counted">Sudah Dihitung</option>
@@ -294,7 +294,7 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                 setEnvelopeFilter('all');
                 setCurrentPage(1);
               }}
-              className="px-2.5 py-1.5 bg-white hover:bg-[#eeeeed] border border-[#d5c3b8] rounded-xl text-xs text-[#6f4627] font-semibold"
+              className="px-2.5 py-1.5 bg-white/85 hover:bg-white border border-purple-200/80 rounded-xl text-xs text-purple-950 font-semibold shadow-2xs"
             >
               Reset Filter
             </button>
@@ -302,7 +302,7 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
 
           <button
             onClick={() => setCurrentPage(1)}
-            className="p-2 bg-white hover:bg-[#eeeeed] border border-[#d5c3b8] rounded-xl text-[#51443c]"
+            className="p-2 bg-white/85 hover:bg-white border border-purple-200/80 rounded-xl text-purple-950 shadow-2xs transition-colors"
             title="Segarkan Data"
             type="button"
           >
@@ -313,10 +313,28 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
 
       {/* Content Area: Table vs Grid Cards */}
       {viewMode === 'grid' ? (
-        <div className="p-4 sm:p-5 bg-[#faf6f2]/40">
+        <div className="p-4 sm:p-5 bg-white/30">
           {paginatedGuests.length === 0 ? (
-            <div className="py-12 text-center text-[#51443c]">
-              Tidak ada tamu yang cocok dengan kriteria pencarian / filter.
+            <div className="py-12 text-center text-gray-500 bg-white/80 rounded-2xl border border-dashed border-purple-200 p-8 max-w-lg mx-auto shadow-xs">
+              <Users className="w-10 h-10 text-purple-400 mx-auto mb-3 opacity-60" />
+              <h4 className="font-bold text-base text-[#1e1b4b]">
+                {guests.length === 0 ? 'Daftar Tamu Masih Kosong' : 'Tidak Ada Tamu Yang Cocok'}
+              </h4>
+              <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                {guests.length === 0
+                  ? 'Aplikasi buku tamu sudah siap dan bersih. Klik tombol "+ Tambah Tamu" di atas untuk mencatat kehadiran.'
+                  : 'Tidak ada tamu yang cocok dengan kata kunci atau filter yang Anda pilih.'}
+              </p>
+              {guests.length === 0 && (
+                <button
+                  type="button"
+                  onClick={onOpenReceptionModal}
+                  className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Tambah Tamu Pertama</span>
+                </button>
+              )}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-4">
@@ -325,30 +343,30 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                 return (
                   <div
                     key={guest.id}
-                    className="bg-white rounded-xl border border-[#d5c3b8] p-4 shadow-2xs hover:shadow-md hover:border-[#8b5e3c]/60 transition-all flex flex-col justify-between group"
+                    className="glass-card p-4 rounded-2xl border border-white/85 shadow-2xs hover:shadow-md hover:border-purple-300 transition-all flex flex-col justify-between group"
                   >
                     <div>
                       {/* Card Top Badges */}
-                      <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#eeeeed]">
+                      <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-purple-100/70">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] font-bold text-[#8c7355] bg-[#faf6f2] px-1.5 py-0.5 rounded border border-[#d5c3b8]/60">
+                          <span className="text-[10px] font-bold text-purple-900 bg-white/90 px-1.5 py-0.5 rounded-md border border-purple-200/80 shadow-2xs">
                             #{globalIndex}
                           </span>
-                          <span className="font-mono font-bold text-xs bg-[#eeeeed] px-2 py-0.5 rounded text-[#6f4627]">
+                          <span className="font-mono font-bold text-xs bg-purple-50 px-2 py-0.5 rounded-md text-purple-950 border border-purple-200/70">
                             {guest.id}
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
                           {guest.category === 'VIP' && (
-                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-950 border border-orange-300">
                               VIP
                             </span>
                           )}
                           <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                               guest.party === 'laki'
-                                ? 'bg-amber-50 text-amber-900 border border-amber-200'
-                                : 'bg-rose-50 text-rose-900 border border-rose-200'
+                                ? 'bg-orange-50 text-orange-900 border border-orange-200'
+                                : 'bg-purple-50 text-purple-900 border border-purple-200'
                             }`}
                           >
                             {guest.party === 'laki' ? 'Laki-laki' : 'Perempuan'}
@@ -357,22 +375,22 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                       </div>
 
                       {/* Name & Relation */}
-                      <h4 className="font-bold text-sm sm:text-base text-[#1a1c1c] leading-tight group-hover:text-[#6f4627] transition-colors">
+                      <h4 className="font-bold text-sm sm:text-base text-[#1e1b4b] leading-tight group-hover:text-purple-900 transition-colors">
                         {guest.name}
                       </h4>
-                      <p className="text-xs text-[#51443c] mt-0.5">{guest.relation || 'Tamu Undangan Resepsi'}</p>
+                      <p className="text-xs text-gray-600 mt-0.5">{guest.relation || 'Tamu Undangan Resepsi'}</p>
 
                       {guest.phone && (
-                        <div className="flex items-center gap-1.5 mt-2 text-xs text-[#6f4627] font-medium">
-                          <Phone className="w-3.5 h-3.5 text-[#8b5e3c]" />
+                        <div className="flex items-center gap-1.5 mt-2 text-xs text-purple-900 font-medium">
+                          <Phone className="w-3.5 h-3.5 text-purple-600" />
                           <span>{guest.phone}</span>
                         </div>
                       )}
 
                       {/* Guest Count & Souvenir */}
-                      <div className="flex items-center justify-between text-xs mt-3 pt-2.5 border-t border-[#f3f4f3]">
-                        <div className="flex items-center gap-1.5 text-[#1a1c1c]">
-                          <Users className="w-3.5 h-3.5 text-[#83746b]" />
+                      <div className="flex items-center justify-between text-xs mt-3 pt-2.5 border-t border-purple-100/60">
+                        <div className="flex items-center gap-1.5 text-[#1e1b4b]">
+                          <Users className="w-3.5 h-3.5 text-gray-500" />
                           <span className="font-bold">{guest.guestCount}</span> Orang
                         </div>
                         <div>
@@ -381,62 +399,62 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                               <Gift className="w-3 h-3 text-emerald-600" /> Souvenir Diserahkan
                             </span>
                           ) : (
-                            <span className="text-[11px] text-[#83746b] italic">Belum Souvenir</span>
+                            <span className="text-[11px] text-gray-400 italic">Belum Souvenir</span>
                           )}
                         </div>
                       </div>
 
                       {/* Envelope info */}
-                      <div className="mt-3 p-2.5 rounded-lg bg-[#faf6f2] border border-[#d5c3b8]/50 text-xs">
-                        <div className="text-[10px] uppercase font-bold text-[#8c7355] flex items-center justify-between">
+                      <div className="mt-3 p-2.5 rounded-xl bg-purple-50/50 border border-purple-100/80 text-xs">
+                        <div className="text-[10px] uppercase font-bold text-purple-900 flex items-center justify-between">
                           <span>Status Amplop</span>
                           {guest.hasEnvelope ? (
                             <span className="text-emerald-700 font-bold flex items-center gap-0.5">
                               <CheckCircle2 className="w-3 h-3" /> Ada
                             </span>
                           ) : (
-                            <span className="text-[#83746b]">Tanpa Amplop</span>
+                            <span className="text-gray-400">Tanpa Amplop</span>
                           )}
                         </div>
                         <div className="mt-1">
                           {guest.envelopeStatus === 'counted' ? (
                             <div>
-                              <div className="font-bold text-[#6f4627] text-sm">
+                              <div className="font-bold text-orange-950 text-sm">
                                 {formatRupiah(guest.envelopeAmount)}
                               </div>
-                              <div className="text-[10px] font-mono text-[#51443c]">
+                              <div className="text-[10px] font-mono text-gray-600">
                                 {guest.envelopeCode || 'AMP-AUTO'} • Terhitung
                               </div>
                             </div>
                           ) : guest.envelopeStatus === 'pending' ? (
-                            <div className="text-amber-800 font-semibold text-[11px] flex items-center gap-1">
-                              <Hourglass className="w-3 h-3 text-amber-700" /> Belum Dihitung ({guest.envelopeCode || 'AMP-AUTO'})
+                            <div className="text-orange-900 font-semibold text-[11px] flex items-center gap-1">
+                              <Hourglass className="w-3 h-3 text-orange-600" /> Belum Dihitung ({guest.envelopeCode || 'AMP-AUTO'})
                             </div>
                           ) : (
-                            <div className="text-[#83746b] italic text-[11px]">Kado Fisik / Tanpa Amplop</div>
+                            <div className="text-gray-500 italic text-[11px]">Kado Fisik / Tanpa Amplop</div>
                           )}
                         </div>
                       </div>
                     </div>
 
                     {/* Card Footer: Check-in & Actions */}
-                    <div className="mt-4 pt-3 border-t border-[#eeeeed] flex items-center justify-between text-xs">
-                      <div className="text-[10px] text-[#51443c]">
-                        <div className="font-bold text-[#1a1c1c]">{guest.checkInTime}</div>
+                    <div className="mt-4 pt-3 border-t border-purple-100/60 flex items-center justify-between text-xs">
+                      <div className="text-[10px] text-gray-500">
+                        <div className="font-bold text-[#1e1b4b]">{guest.checkInTime}</div>
                         <div>Oleh: {guest.officer}</div>
                       </div>
 
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => onViewGuest(guest)}
-                          className="p-1.5 text-[#51443c] hover:text-[#6f4627] hover:bg-[#faf6f2] rounded-lg transition-colors"
+                          className="p-1.5 text-gray-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-colors"
                           title="Lihat Detail & Cetak Thermal"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => onEditGuest(guest)}
-                          className="p-1.5 text-[#51443c] hover:text-[#6f4627] hover:bg-[#faf6f2] rounded-lg transition-colors"
+                          className="p-1.5 text-gray-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-colors"
                           title="Edit Tamu"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -447,7 +465,7 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                               onDeleteGuest(guest.id);
                             }
                           }}
-                          className="p-1.5 text-[#51443c] hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-1.5 text-gray-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                           title="Hapus Tamu"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -465,7 +483,7 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
         <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr className="bg-[#e8e8e7]/70 border-b border-[#d5c3b8] text-[#51443c] text-xs font-bold uppercase tracking-wider">
+              <tr className="bg-purple-100/50 border-b border-purple-200/70 text-purple-950 text-xs font-bold uppercase tracking-wider">
                 <th className="py-3 px-3 sm:px-4 w-12 text-center">No</th>
                 <th className="py-3 px-3 sm:px-4">Kode Tamu</th>
                 <th className="py-3 px-3 sm:px-4">Nama Tamu & Relasi</th>
@@ -477,33 +495,51 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                 <th className="py-3 px-3 sm:px-4 text-center">Aksi</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#d5c3b8]/60">
+            <tbody className="divide-y divide-purple-100/60">
               {paginatedGuests.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-8 text-center text-[#51443c]">
-                    Tidak ada tamu yang cocok dengan kriteria pencarian / filter.
+                  <td colSpan={9} className="py-12 text-center text-gray-500">
+                    <Users className="w-8 h-8 text-purple-400 mx-auto mb-2 opacity-50" />
+                    <p className="font-bold text-sm text-[#1e1b4b]">
+                      {guests.length === 0 ? 'Daftar Tamu Masih Kosong' : 'Tidak Ada Tamu Yang Cocok'}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {guests.length === 0
+                        ? 'Klik tombol "+ Tambah Tamu" di atas untuk mulai mencatat presensi tamu.'
+                        : 'Tidak ada tamu yang cocok dengan filter atau kata kunci pencarian.'}
+                    </p>
+                    {guests.length === 0 && (
+                      <button
+                        type="button"
+                        onClick={onOpenReceptionModal}
+                        className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Tambah Tamu Pertama</span>
+                      </button>
+                    )}
                   </td>
                 </tr>
               ) : (
                 paginatedGuests.map((guest, idx) => {
                   const globalIndex = (validPage - 1) * itemsPerPage + idx + 1;
                   return (
-                    <tr key={guest.id} className="hover:bg-[#f3f4f3] transition-colors group">
-                      <td className="py-3 px-3 sm:px-4 text-center font-medium text-[#51443c]">
+                    <tr key={guest.id} className="hover:bg-purple-50/40 transition-colors group">
+                      <td className="py-3 px-3 sm:px-4 text-center font-semibold text-purple-900">
                         {globalIndex}
                       </td>
 
                       <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
-                        <span className="font-mono font-bold text-xs bg-[#eeeeed] px-2 py-1 rounded text-[#6f4627] border border-[#d5c3b8]/60">
+                        <span className="font-mono font-bold text-xs bg-white/90 px-2 py-1 rounded-md text-purple-950 border border-purple-200/80 shadow-2xs">
                           {guest.id}
                         </span>
                       </td>
 
                       <td className="py-3 px-3 sm:px-4">
-                        <div className="font-bold text-[#1a1c1c] flex items-center gap-1.5 flex-wrap">
+                        <div className="font-bold text-[#1e1b4b] flex items-center gap-1.5 flex-wrap">
                           <span>{guest.name}</span>
                           {guest.category === 'VIP' && (
-                            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-orange-100 text-orange-950 border border-orange-300">
                               VIP
                             </span>
                           )}
@@ -513,10 +549,10 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                             </span>
                           )}
                         </div>
-                        <div className="text-xs text-[#51443c] flex items-center gap-2 mt-0.5">
+                        <div className="text-xs text-gray-600 flex items-center gap-2 mt-0.5">
                           <span>{guest.relation || 'Tamu Undangan Resepsi'}</span>
                           {guest.phone && (
-                            <span className="inline-flex items-center gap-0.5 text-[11px] text-[#83746b]">
+                            <span className="inline-flex items-center gap-0.5 text-[11px] text-gray-500">
                               <Phone className="w-2.5 h-2.5" />
                               <span>{guest.phone}</span>
                             </span>
@@ -526,10 +562,10 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
 
                       <td className="py-3 px-3 sm:px-4 text-center whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
                             guest.party === 'laki'
-                              ? 'bg-amber-50 text-amber-900 border border-amber-200'
-                              : 'bg-rose-50 text-rose-900 border border-rose-200'
+                              ? 'bg-orange-50 text-orange-900 border border-orange-200'
+                              : 'bg-purple-50 text-purple-900 border border-purple-200'
                           }`}
                         >
                           {guest.party === 'laki' ? 'Laki-laki' : 'Perempuan'}
@@ -538,9 +574,9 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
 
                       <td className="py-3 px-3 sm:px-4 text-center whitespace-nowrap">
                         <span className="inline-flex items-center gap-1">
-                          <Users className="w-3.5 h-3.5 text-[#83746b]" />
-                          <span className="font-bold text-[#1a1c1c]">{guest.guestCount}</span>
-                          <span className="text-xs text-[#51443c]">org</span>
+                          <Users className="w-3.5 h-3.5 text-gray-500" />
+                          <span className="font-bold text-[#1e1b4b]">{guest.guestCount}</span>
+                          <span className="text-xs text-gray-500">org</span>
                         </span>
                       </td>
 
@@ -548,54 +584,54 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                         {guest.hasEnvelope ? (
                           <CheckCircle2 className="w-5 h-5 text-emerald-600 inline" />
                         ) : (
-                          <XCircle className="w-4 h-4 text-[#83746b] inline" />
+                          <XCircle className="w-4 h-4 text-gray-400 inline" />
                         )}
                       </td>
 
                       <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
                         {guest.envelopeStatus === 'counted' ? (
                           <div>
-                            <div className="font-bold text-[#6f4627]">
+                            <div className="font-bold text-orange-950">
                               {formatRupiah(guest.envelopeAmount)}
                             </div>
-                            <div className="text-[11px] font-mono text-[#51443c]">
+                            <div className="text-[11px] font-mono text-gray-600">
                               {guest.envelopeCode || 'AMP-AUTO'} •{' '}
                               <span className="text-emerald-700 font-semibold">Sudah Dihitung</span>
                             </div>
                           </div>
                         ) : guest.envelopeStatus === 'pending' ? (
                           <div>
-                            <div className="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                            <div className="inline-flex items-center gap-1 text-xs font-semibold text-orange-800 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-200">
                               <Hourglass className="w-3 h-3" /> Belum Dihitung
                             </div>
-                            <div className="text-[11px] font-mono text-[#51443c]">
+                            <div className="text-[11px] font-mono text-gray-600">
                               {guest.envelopeCode || 'AMP-AUTO'} • Amplop Fisik Tertutup
                             </div>
                           </div>
                         ) : (
-                          <span className="text-xs text-[#51443c] italic">
+                          <span className="text-xs text-gray-500 italic">
                             Tanpa Amplop (Kado Fisik)
                           </span>
                         )}
                       </td>
 
                       <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
-                        <div className="text-xs font-semibold text-[#1a1c1c]">{guest.checkInTime}</div>
-                        <div className="text-[11px] text-[#51443c]">Petugas: {guest.officer}</div>
+                        <div className="text-xs font-semibold text-[#1e1b4b]">{guest.checkInTime}</div>
+                        <div className="text-[11px] text-gray-500">Petugas: {guest.officer}</div>
                       </td>
 
                       <td className="py-3 px-3 sm:px-4 text-center whitespace-nowrap">
                         <div className="inline-flex items-center gap-1">
                           <button
                             onClick={() => onViewGuest(guest)}
-                            className="p-1.5 text-[#51443c] hover:text-[#6f4627] hover:bg-[#eeeeed] rounded-lg transition-colors"
+                            className="p-1.5 text-gray-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-colors"
                             title="Lihat Kartu Tamu & Bukti Souvenir"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => onEditGuest(guest)}
-                            className="p-1.5 text-[#51443c] hover:text-[#6f4627] hover:bg-[#eeeeed] rounded-lg transition-colors"
+                            className="p-1.5 text-gray-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-colors"
                             title="Edit Data Tamu & Amplop"
                           >
                             <Edit3 className="w-4 h-4" />
@@ -606,7 +642,7 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
                                 onDeleteGuest(guest.id);
                               }
                             }}
-                            className="p-1.5 text-[#51443c] hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-1.5 text-gray-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                             title="Hapus Entri Tamu"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -623,21 +659,21 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
       )}
 
       {/* Table Pagination Bar */}
-      <div className="p-4 bg-white border-t border-[#d5c3b8] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-        <div className="text-[#51443c]">
+      <div className="p-4 bg-white/70 border-t border-purple-100/70 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div className="text-gray-600">
           Menampilkan{' '}
-          <span className="font-bold text-[#1a1c1c]">
+          <span className="font-bold text-[#1e1b4b]">
             {paginatedGuests.length > 0 ? (validPage - 1) * itemsPerPage + 1 : 0} -{' '}
             {Math.min(validPage * itemsPerPage, filteredGuests.length)}
           </span>{' '}
-          dari <span className="font-bold text-[#1a1c1c]">{filteredGuests.length}</span> entri tamu
+          dari <span className="font-bold text-[#1e1b4b]">{filteredGuests.length}</span> entri tamu
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={validPage === 1}
-            className="px-2.5 py-1.5 border border-[#d5c3b8] rounded-lg text-[#51443c] hover:bg-[#eeeeed] disabled:opacity-40"
+            className="px-3 py-1.5 border border-purple-200/80 bg-white/80 rounded-xl text-purple-950 hover:bg-white disabled:opacity-40 shadow-2xs font-semibold"
           >
             Sebelumnya
           </button>
@@ -648,10 +684,10 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
               <button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
-                className={`px-3 py-1.5 rounded-lg font-bold ${
+                className={`px-3 py-1.5 rounded-xl font-bold shadow-2xs transition-all ${
                   validPage === pageNum
-                    ? 'bg-[#8b5e3c] text-white'
-                    : 'border border-[#d5c3b8] hover:bg-[#eeeeed] text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white'
+                    : 'border border-purple-200/80 bg-white/80 hover:bg-white text-purple-950'
                 }`}
               >
                 {pageNum}
@@ -659,12 +695,12 @@ export const GuestTableSection: React.FC<GuestTableSectionProps> = ({
             );
           })}
 
-          {totalPages > 5 && <span className="px-1 text-[#83746b]">...</span>}
+          {totalPages > 5 && <span className="px-1 text-gray-400">...</span>}
 
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={validPage === totalPages}
-            className="px-2.5 py-1.5 border border-[#d5c3b8] rounded-lg text-[#1a1c1c] hover:bg-[#eeeeed] disabled:opacity-40"
+            className="px-3 py-1.5 border border-purple-200/80 bg-white/80 rounded-xl text-purple-950 hover:bg-white disabled:opacity-40 shadow-2xs font-semibold"
           >
             Selanjutnya
           </button>

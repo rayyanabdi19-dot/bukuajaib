@@ -42,16 +42,32 @@ import { EventSettingsModal } from './components/EventSettingsModal';
 import { AnalyticsChartsSection } from './components/AnalyticsChartsSection';
 import { DigitalClockCalendarModal } from './components/DigitalClockCalendarModal';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { useAutosaveIndexedDB } from './hooks/useAutosaveIndexedDB';
+import { loadAppStateFromIndexedDB, clearAppStateFromIndexedDB } from './services/indexedDBService';
 
 import { CheckCircle2, Info, AlertTriangle } from 'lucide-react';
 
 export default function App() {
-  // Persistence with localStorage fallback
+  // Persistence with localStorage fallback and automatic dummy data cleanup
   const [guests, setGuests] = useState<Guest[]>(() => {
     const saved = localStorage.getItem('buku_ajaib_guests');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const hasDummy = parsed.some(
+            (g: any) =>
+              g.id === 'BT-0526' ||
+              g.name?.includes('Hendra Kurniawan') ||
+              g.name?.includes('Dewi Lestari') ||
+              g.name?.includes('Bambang Susanto')
+          );
+          if (hasDummy) {
+            localStorage.removeItem('buku_ajaib_guests');
+            return [];
+          }
+          return parsed;
+        }
       } catch (e) {
         console.error('Failed to load saved guests', e);
       }
@@ -63,7 +79,20 @@ export default function App() {
     const saved = localStorage.getItem('buku_ajaib_logs');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const hasDummy = parsed.some(
+            (l: any) =>
+              l.message?.includes('Prof. Dr. Hendra') ||
+              l.message?.includes('Dewi Lestari') ||
+              l.id === 'log-1'
+          );
+          if (hasDummy) {
+            localStorage.removeItem('buku_ajaib_logs');
+            return initialLogs;
+          }
+          return parsed;
+        }
       } catch (e) {
         console.error('Failed to load saved logs', e);
       }
@@ -75,7 +104,12 @@ export default function App() {
     const saved = localStorage.getItem('buku_ajaib_event_info');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (parsed.groomName === 'Budi Pratama, S.T.' || parsed.coupleTitle === 'Budi & Siti Wedding') {
+          localStorage.removeItem('buku_ajaib_event_info');
+          return initialWeddingEvent;
+        }
+        return parsed;
       } catch (e) {
         console.error('Failed to load saved event info', e);
       }
@@ -134,6 +168,35 @@ export default function App() {
 
   // Temporary toast notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // 10-Second Automatic IndexedDB Persistence for Guests, Logs, & EventInfo
+  const autosave = useAutosaveIndexedDB({
+    guests,
+    logs,
+    eventInfo,
+    enabled: true,
+    intervalMs: 10000, // 10 detik
+  });
+
+  // Restore from IndexedDB if local storage is empty upon initialization
+  useEffect(() => {
+    const savedLocal = localStorage.getItem('buku_ajaib_guests');
+    if (!savedLocal || savedLocal === '[]') {
+      loadAppStateFromIndexedDB()
+        .then((snapshot) => {
+          if (snapshot && Array.isArray(snapshot.guests) && snapshot.guests.length > 0) {
+            setGuests(snapshot.guests);
+            if (Array.isArray(snapshot.logs) && snapshot.logs.length > 0) {
+              setLogs(snapshot.logs);
+            }
+            if (snapshot.eventInfo) {
+              setEventInfo(snapshot.eventInfo);
+            }
+          }
+        })
+        .catch((e) => console.warn('Pengecekan awal IndexedDB selesai.', e));
+    }
+  }, []);
 
   // 1. Firebase Auth listener
   useEffect(() => {
@@ -567,15 +630,16 @@ export default function App() {
     showToast(`QR Code ${guest.name} (${guest.id}) valid!`);
   };
 
-  // 6. Reset Simulasi Data
+  // 6. Reset / Kosongkan Data Tamu
   const handleResetData = () => {
-    if (confirm('Kembalikan seluruh data simulasi tamu dan log ke setelan awal pabrik (526 tamu terdaftar)?')) {
+    if (confirm('Kosongkan seluruh data tamu dan log untuk memulai resepsi baru? Tindakan ini akan mengosongkan daftar tamu siap untuk acara asli.')) {
       localStorage.removeItem('buku_ajaib_guests');
       localStorage.removeItem('buku_ajaib_logs');
-      setGuests(initialGuests);
+      clearAppStateFromIndexedDB().catch((err) => console.warn('Gagal reset IndexedDB:', err));
+      setGuests([]);
       setLogs(initialLogs);
-      syncDataToServer(initialGuests, initialLogs, eventInfo);
-      showToast('Data simulasi tamu dan amplop berhasil di-reset ke setelan awal.');
+      syncDataToServer([], initialLogs, eventInfo);
+      showToast('Seluruh data tamu berhasil dikosongkan. Siap untuk mencatat tamu resepsi.');
     }
   };
 
@@ -726,6 +790,7 @@ export default function App() {
         syncStatus={syncStatus}
         connectedDevicesCount={connectedDevicesCount}
         firebaseConnected={isFirebaseConnected}
+        autosave={autosave}
       />
 
       {/* Main Content Area with Smooth Framer Motion Tab Transitions */}
@@ -969,7 +1034,7 @@ export default function App() {
             </button>
             <span>•</span>
             <button onClick={handleResetData} className="hover:text-red-700 hover:underline">
-              Reset Simulasi
+              Kosongkan Data Tamu
             </button>
           </div>
         </div>

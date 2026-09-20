@@ -40,17 +40,17 @@ interface AnalyticsChartsSectionProps {
   subtitle?: string;
 }
 
-// Color palette aligned with warm luxury wedding aesthetic
-const COLOR_MALE = '#8b5e3c'; // Warm Amber/Bronze for Pihak Laki-laki
-const COLOR_FEMALE = '#c27803'; // Warm Golden Ochre for Pihak Perempuan
-const COLOR_TOTAL = '#52341b'; // Deep Chestnut
+// Color palette aligned with Orange Kulit Jeruk, Putih, and Ungu (Purple) Glassmorphism UI
+const COLOR_MALE = '#ea580c'; // Orange Kulit Jeruk for Pihak Laki-laki
+const COLOR_FEMALE = '#9333ea'; // Ungu / Purple for Pihak Perempuan
+const COLOR_TOTAL = '#7c3aed'; // Deep Violet
 const CATEGORY_COLORS: Record<string, string> = {
-  VIP: '#735c00',
-  Keluarga: '#8b5e3c',
-  'Rekan Kerja': '#b45309',
-  'Teman Sekolah': '#d97706',
-  Komunitas: '#92400e',
-  Umum: '#a16207',
+  VIP: '#f97316', // Bright Orange
+  Keluarga: '#9333ea', // Royal Purple
+  'Rekan Kerja': '#ea580c', // Tangerine
+  'Teman Sekolah': '#a855f7', // Light Purple
+  Komunitas: '#c2410c', // Dark Tangerine
+  Umum: '#7e22ce', // Deep Purple
 };
 
 const ALL_CATEGORIES: Array<Guest['category']> = [
@@ -409,49 +409,51 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
 
   return (
     <section className="space-y-6" id="analisis-section">
-      {/* Header Bar */}
-      <div className="bg-white p-5 md:p-6 rounded-xl border border-[#d5c3b8] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* Header Bar (Glassmorphic) */}
+      <div className="glass-panel p-5 md:p-6 rounded-2xl border border-white/80 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold text-[#735c00] uppercase tracking-wider mb-1">
-            <BarChart3 className="w-4 h-4 text-[#8b5e3c]" />
+          <div className="flex items-center gap-2 text-xs font-bold text-orange-700 uppercase tracking-wider mb-1">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-orange-500 to-purple-600 text-white flex items-center justify-center shadow-xs">
+              <BarChart3 className="w-3.5 h-3.5" />
+            </div>
             <span>Dashboard Visualisasi & Intelijen Resepsi</span>
           </div>
-          <h3 className="font-serif-luxury text-xl md:text-2xl font-bold text-[#6f4627]">
+          <h3 className="font-serif-luxury text-xl md:text-2xl font-bold text-[#1e1b4b]">
             {title}
           </h3>
-          <p className="text-xs sm:text-sm text-[#51443c] mt-0.5">{subtitle}</p>
+          <p className="text-xs sm:text-sm text-gray-600 mt-0.5">{subtitle}</p>
         </div>
 
         {/* Global Filter Toolbar */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Party Filter */}
-          <div className="flex items-center bg-[#f3f4f3] p-1 rounded-xl border border-[#d5c3b8]">
+          <div className="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-xl border border-purple-200/60 shadow-2xs">
             <button
               onClick={() => setSelectedPartyFilter('all')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 selectedPartyFilter === 'all'
-                  ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-purple-900'
               }`}
             >
               Semua Pihak
             </button>
             <button
               onClick={() => setSelectedPartyFilter('laki')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 selectedPartyFilter === 'laki'
-                  ? 'bg-[#8b5e3c] text-white shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-orange-900'
               }`}
             >
               Pria
             </button>
             <button
               onClick={() => setSelectedPartyFilter('perempuan')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 selectedPartyFilter === 'perempuan'
-                  ? 'bg-[#735c00] text-white shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-gradient-to-r from-purple-600 to-violet-700 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-purple-900'
               }`}
             >
               Wanita
@@ -459,33 +461,33 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
           </div>
 
           {/* Time Filter */}
-          <div className="flex items-center bg-[#f3f4f3] p-1 rounded-xl border border-[#d5c3b8]">
+          <div className="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-xl border border-purple-200/60 shadow-2xs">
             <button
               onClick={() => setTimeFilter('all')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 timeFilter === 'all'
-                  ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-purple-900 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-purple-900'
               }`}
             >
               Semua Jam
             </button>
             <button
               onClick={() => setTimeFilter('siang')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 timeFilter === 'siang'
-                  ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-orange-500 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-orange-900'
               }`}
             >
               Siang (&lt;16:00)
             </button>
             <button
               onClick={() => setTimeFilter('malam')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                 timeFilter === 'malam'
-                  ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                  : 'text-[#51443c] hover:text-[#1a1c1c]'
+                  ? 'bg-purple-700 text-white shadow-xs font-bold'
+                  : 'text-gray-600 hover:text-purple-900'
               }`}
             >
               Malam (&ge;16:00)
@@ -494,99 +496,99 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
         </div>
       </div>
 
-      {/* TOP METRIC HIGHLIGHTS CARDS */}
+      {/* TOP METRIC HIGHLIGHTS CARDS (Glassmorphic) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Peak Arrival Hour Card */}
-        <div className="bg-white p-4 md:p-5 rounded-xl border border-[#d5c3b8] shadow-sm flex flex-col justify-between hover:border-[#8b5e3c]/50 transition-colors">
+        <div className="glass-card p-5 rounded-2xl flex flex-col justify-between border-white/80 group">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#735c00] flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-orange-700 flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-orange-500" />
                 <span>JAM PUNCAK KEDATANGAN</span>
               </span>
-              <h4 className="font-serif-luxury text-2xl font-bold text-[#1a1c1c] mt-1">
+              <h4 className="font-serif-luxury text-2xl font-bold text-[#1e1b4b] mt-1.5">
                 {peakHourInfo.hourStr !== '-' ? `${peakHourInfo.hourStr} WIB` : '18:00 WIB'}
               </h4>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 text-white flex items-center justify-center shadow-md shadow-orange-500/20">
               <TrendingUp className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-3 pt-2.5 border-t border-[#eeeeed] flex items-center justify-between text-xs text-[#51443c]">
+          <div className="mt-4 pt-3 border-t border-purple-100/60 flex items-center justify-between text-xs text-gray-600">
             <span>Volume Kedatangan:</span>
-            <span className="font-bold text-[#6f4627]">
+            <span className="font-bold text-orange-950 bg-orange-50 px-2.5 py-0.5 rounded-full border border-orange-200/80">
               {peakHourInfo.count} Tamu ({peakHourInfo.people} Jiwa)
             </span>
           </div>
         </div>
 
         {/* Top Category Card */}
-        <div className="bg-white p-4 md:p-5 rounded-xl border border-[#d5c3b8] shadow-sm flex flex-col justify-between hover:border-[#8b5e3c]/50 transition-colors">
+        <div className="glass-card p-5 rounded-2xl flex flex-col justify-between border-white/80 group">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#8b5e3c] flex items-center gap-1">
-                <Award className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 flex items-center gap-1.5">
+                <Award className="w-3.5 h-3.5 text-purple-500" />
                 <span>KATEGORI TERTINGGI</span>
               </span>
-              <h4 className="font-serif-luxury text-2xl font-bold text-[#1a1c1c] mt-1">
+              <h4 className="font-serif-luxury text-2xl font-bold text-[#1e1b4b] mt-1.5">
                 {topCategory?.category || 'VIP'}
               </h4>
             </div>
-            <div className="w-9 h-9 rounded-xl bg-[#ffdcc5] text-[#6f4627] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-700 text-white flex items-center justify-center shadow-md shadow-purple-600/20">
               <Gift className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-3 pt-2.5 border-t border-[#eeeeed] flex items-center justify-between text-xs text-[#51443c]">
+          <div className="mt-4 pt-3 border-t border-purple-100/60 flex items-center justify-between text-xs text-gray-600">
             <span>Total Donasi:</span>
-            <span className="font-bold text-emerald-800">
+            <span className="font-bold text-purple-900 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200/80">
               {formatRupiah(topCategory?.totalNominal || 0)}
             </span>
           </div>
         </div>
 
-        {/* Pihak Laki-Laki Total */}
-        <div className="bg-white p-4 md:p-5 rounded-xl border border-[#d5c3b8] shadow-sm flex flex-col justify-between hover:border-[#8b5e3c]/50 transition-colors">
+        {/* Pihak Laki-Laki Total (Glass Orange) */}
+        <div className="glass-card-orange p-5 rounded-2xl flex flex-col justify-between group">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#8b5e3c]"></span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-orange-950 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-orange-600"></span>
                 <span>AMPLOP PIHAK LAKI-LAKI</span>
               </span>
-              <h4 className="font-serif-luxury text-2xl font-bold text-[#1a1c1c] mt-1">
+              <h4 className="font-serif-luxury text-2xl font-bold text-orange-950 mt-1.5">
                 {formatRupiah(totalsByParty.totalLakiCash)}
               </h4>
             </div>
-            <span className="text-xs bg-amber-100 text-amber-950 font-bold px-2 py-1 rounded-lg">
+            <span className="text-xs bg-orange-500 text-white font-bold px-2.5 py-1 rounded-xl shadow-2xs">
               {malePercent}% Total
             </span>
           </div>
-          <div className="mt-3 pt-2.5 border-t border-[#eeeeed] flex items-center justify-between text-xs text-[#51443c]">
+          <div className="mt-4 pt-3 border-t border-orange-200/60 flex items-center justify-between text-xs text-orange-950/80">
             <span>Kotak Box Pria:</span>
-            <span className="font-bold text-[#1a1c1c]">
+            <span className="font-bold text-orange-950 bg-white/80 px-2.5 py-0.5 rounded-md border border-orange-200">
               {totalsByParty.totalLakiEnvelopes} Amplop Fisik
             </span>
           </div>
         </div>
 
-        {/* Pihak Perempuan Total */}
-        <div className="bg-white p-4 md:p-5 rounded-xl border border-[#d5c3b8] shadow-sm flex flex-col justify-between hover:border-[#8b5e3c]/50 transition-colors">
+        {/* Pihak Perempuan Total (Glass Ungu) */}
+        <div className="glass-card-purple p-5 rounded-2xl flex flex-col justify-between group">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-rose-900 flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#c27803]"></span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-950 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-purple-600"></span>
                 <span>AMPLOP PIHAK PEREMPUAN</span>
               </span>
-              <h4 className="font-serif-luxury text-2xl font-bold text-[#1a1c1c] mt-1">
+              <h4 className="font-serif-luxury text-2xl font-bold text-purple-950 mt-1.5">
                 {formatRupiah(totalsByParty.totalPerempuanCash)}
               </h4>
             </div>
-            <span className="text-xs bg-rose-100 text-rose-950 font-bold px-2 py-1 rounded-lg">
+            <span className="text-xs bg-purple-600 text-white font-bold px-2.5 py-1 rounded-xl shadow-2xs">
               {femalePercent}% Total
             </span>
           </div>
-          <div className="mt-3 pt-2.5 border-t border-[#eeeeed] flex items-center justify-between text-xs text-[#51443c]">
+          <div className="mt-4 pt-3 border-t border-purple-200/60 flex items-center justify-between text-xs text-purple-950/80">
             <span>Kotak Box Wanita:</span>
-            <span className="font-bold text-[#1a1c1c]">
+            <span className="font-bold text-purple-950 bg-white/80 px-2.5 py-0.5 rounded-md border border-purple-200">
               {totalsByParty.totalPerempuanEnvelopes} Amplop Fisik
             </span>
           </div>
@@ -596,16 +598,18 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
       {/* ========================================================================= */}
       {/* CHART 1: TREN KEHADIRAN PER JAM (HOURLY ATTENDANCE TREND) */}
       {/* ========================================================================= */}
-      <div className="bg-white p-5 md:p-6 rounded-xl border border-[#d5c3b8] shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#eeeeed] pb-3.5">
+      <div className="glass-panel p-5 md:p-6 rounded-2xl border border-white/80 shadow-md space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-100/70 pb-3.5">
           <div>
             <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#8b5e3c]" />
-              <h4 className="font-serif-luxury text-lg font-bold text-[#6f4627]">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center shadow-xs">
+                <Clock className="w-3.5 h-3.5" />
+              </div>
+              <h4 className="font-serif-luxury text-lg font-bold text-[#1e1b4b]">
                 1. Tren Laju Kehadiran Tamu Per Jam
               </h4>
             </div>
-            <p className="text-xs text-[#51443c] mt-0.5">
+            <p className="text-xs text-gray-600 mt-0.5">
               Grafik distribusi arus kedatangan tamu di meja resepsi sepanjang rangkaian acara pernikahan.
             </p>
           </div>
@@ -613,23 +617,23 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
           {/* Control Buttons for Hourly Chart */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Metric Mode Toggle */}
-            <div className="flex items-center bg-[#f3f4f3] p-1 rounded-lg border border-[#d5c3b8]/70 text-xs">
+            <div className="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-xl border border-purple-200/60 shadow-2xs text-xs">
               <button
                 onClick={() => setAttendanceMetric('tamu')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   attendanceMetric === 'tamu'
-                    ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-purple-900'
                 }`}
               >
                 Jumlah Tamu (Entry)
               </button>
               <button
                 onClick={() => setAttendanceMetric('orang')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   attendanceMetric === 'orang'
-                    ? 'bg-white text-[#6f4627] shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-purple-900'
                 }`}
               >
                 Total Jiwa (Fisik)
@@ -637,13 +641,13 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
             </div>
 
             {/* Chart Type Toggle */}
-            <div className="flex items-center bg-[#f3f4f3] p-1 rounded-lg border border-[#d5c3b8]/70 text-xs">
+            <div className="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-xl border border-purple-200/60 shadow-2xs text-xs">
               <button
                 onClick={() => setAttendanceChartType('area')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   attendanceChartType === 'area'
-                    ? 'bg-[#8b5e3c] text-white shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-orange-950'
                 }`}
                 title="Area Chart (Grafik Aliran Kehadiran)"
               >
@@ -651,10 +655,10 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
               </button>
               <button
                 onClick={() => setAttendanceChartType('bar')}
-                className={`px-2.5 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   attendanceChartType === 'bar'
-                    ? 'bg-[#8b5e3c] text-white shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-orange-950'
                 }`}
                 title="Bar Chart (Kolom Komparasi)"
               >
@@ -671,23 +675,23 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
               <AreaChart data={hourlyData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorLaki" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={COLOR_MALE} stopOpacity={0.4} />
+                    <stop offset="5%" stopColor={COLOR_MALE} stopOpacity={0.45} />
                     <stop offset="95%" stopColor={COLOR_MALE} stopOpacity={0.0} />
                   </linearGradient>
                   <linearGradient id="colorPerempuan" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={COLOR_FEMALE} stopOpacity={0.4} />
+                    <stop offset="5%" stopColor={COLOR_FEMALE} stopOpacity={0.45} />
                     <stop offset="95%" stopColor={COLOR_FEMALE} stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5ded7" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e9d5ff" opacity={0.6} vertical={false} />
                 <XAxis
                   dataKey="hourStr"
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                 />
                 <YAxis
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                   allowDecimals={false}
                 />
                 <Tooltip content={<CustomHourlyTooltip />} />
@@ -718,15 +722,15 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
               </AreaChart>
             ) : (
               <BarChart data={hourlyData} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5ded7" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e9d5ff" opacity={0.6} vertical={false} />
                 <XAxis
                   dataKey="hourStr"
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                 />
                 <YAxis
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                   allowDecimals={false}
                 />
                 <Tooltip content={<CustomHourlyTooltip />} />
@@ -740,13 +744,13 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
                   dataKey={attendanceMetric === 'tamu' ? 'tamuLaki' : 'orangLaki'}
                   name="Pihak Laki-laki"
                   fill={COLOR_MALE}
-                  radius={[4, 4, 0, 0]}
+                  radius={[6, 6, 0, 0]}
                 />
                 <Bar
                   dataKey={attendanceMetric === 'tamu' ? 'tamuPerempuan' : 'orangPerempuan'}
                   name="Pihak Perempuan"
                   fill={COLOR_FEMALE}
-                  radius={[4, 4, 0, 0]}
+                  radius={[6, 6, 0, 0]}
                 />
               </BarChart>
             )}
@@ -754,16 +758,16 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
         </div>
 
         {/* Hourly Insights Footer */}
-        <div className="pt-3 border-t border-[#eeeeed] flex flex-wrap items-center justify-between gap-2 text-xs text-[#51443c]">
+        <div className="pt-3 border-t border-purple-100/70 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-700">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-xs"></span>
             <span>
               <strong>Puncak Trafik:</strong> Terjadi pada rentang waktu{' '}
-              <strong className="text-[#1a1c1c]">{peakHourInfo.hourStr} WIB</strong> dengan{' '}
+              <strong className="text-[#1e1b4b]">{peakHourInfo.hourStr} WIB</strong> dengan{' '}
               {peakHourInfo.count} tamu ({peakHourInfo.people} jiwa).
             </span>
           </div>
-          <div className="text-[11px] text-[#735c00] font-semibold bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+          <div className="text-[11px] text-orange-950 font-bold bg-orange-100/90 px-3 py-1 rounded-full border border-orange-200 shadow-2xs">
             Total Kumulatif: {cumulativeAttendance} Tamu Hadir
           </div>
         </div>
@@ -774,38 +778,40 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Main Bar Chart: Per Kategori & Pihak Mempelai (8 Cols) */}
-        <div className="lg:col-span-8 bg-white p-5 md:p-6 rounded-xl border border-[#d5c3b8] shadow-sm space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#eeeeed] pb-3.5">
+        <div className="lg:col-span-8 glass-panel p-5 md:p-6 rounded-2xl border border-white/80 shadow-md space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-100/70 pb-3.5">
             <div>
               <div className="flex items-center gap-2">
-                <Gift className="w-4 h-4 text-[#735c00]" />
-                <h4 className="font-serif-luxury text-lg font-bold text-[#6f4627]">
+                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-purple-600 to-violet-700 text-white flex items-center justify-center shadow-xs">
+                  <Gift className="w-3.5 h-3.5" />
+                </div>
+                <h4 className="font-serif-luxury text-lg font-bold text-[#1e1b4b]">
                   2. Nominal Amplop Berdasarkan Kategori Tamu & Pihak
                 </h4>
               </div>
-              <p className="text-xs text-[#51443c] mt-0.5">
+              <p className="text-xs text-gray-600 mt-0.5">
                 Perbandingan total nominal sumbangan amplop dari keluarga, rekan kerja, VIP, dll.
               </p>
             </div>
 
             {/* Toggle Mode: Nominal (Rp) vs Jumlah Amplop (Pcs) */}
-            <div className="flex items-center bg-[#f3f4f3] p-1 rounded-lg border border-[#d5c3b8]/70 text-xs">
+            <div className="flex items-center bg-white/70 backdrop-blur-md p-1 rounded-xl border border-purple-200/60 shadow-2xs text-xs">
               <button
                 onClick={() => setEnvelopeViewMode('nominal')}
-                className={`px-3 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   envelopeViewMode === 'nominal'
-                    ? 'bg-[#735c00] text-white shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-purple-600 to-violet-700 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-purple-950'
                 }`}
               >
                 Nominal Rupiah (Rp)
               </button>
               <button
                 onClick={() => setEnvelopeViewMode('jumlah')}
-                className={`px-3 py-1 rounded-md font-semibold transition-all ${
+                className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                   envelopeViewMode === 'jumlah'
-                    ? 'bg-[#735c00] text-white shadow-2xs font-bold'
-                    : 'text-[#51443c] hover:text-[#1a1c1c]'
+                    ? 'bg-gradient-to-r from-purple-600 to-violet-700 text-white shadow-xs font-bold'
+                    : 'text-gray-600 hover:text-purple-950'
                 }`}
               >
                 Jumlah Amplop (Pcs)
@@ -820,17 +826,17 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
                 data={categoryData}
                 margin={{ top: 10, right: 15, left: envelopeViewMode === 'nominal' ? 15 : -10, bottom: 25 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5ded7" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e9d5ff" opacity={0.6} vertical={false} />
                 <XAxis
                   dataKey="category"
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                   angle={-15}
                   textAnchor="end"
                 />
                 <YAxis
-                  tick={{ fill: '#51443c', fontSize: 11 }}
-                  stroke="#d5c3b8"
+                  tick={{ fill: '#6b21a8', fontSize: 11 }}
+                  stroke="#d8b4fe"
                   tickFormatter={(val) => {
                     if (envelopeViewMode === 'jumlah') return `${val}`;
                     if (val >= 1000000) return `${val / 1000000}jt`;
@@ -849,23 +855,23 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
                   dataKey={envelopeViewMode === 'nominal' ? 'nominalLaki' : 'amplopLaki'}
                   name="Pihak Laki-laki"
                   fill={COLOR_MALE}
-                  radius={[4, 4, 0, 0]}
+                  radius={[6, 6, 0, 0]}
                 />
                 <Bar
                   dataKey={envelopeViewMode === 'nominal' ? 'nominalPerempuan' : 'amplopPerempuan'}
                   name="Pihak Perempuan"
                   fill={COLOR_FEMALE}
-                  radius={[4, 4, 0, 0]}
+                  radius={[6, 6, 0, 0]}
                 />
               </BarChart>
             </ResponsiveContainer>
           </div>
 
           {/* Category Summary Matrix Table */}
-          <div className="overflow-x-auto pt-2 border-t border-[#eeeeed]">
+          <div className="overflow-x-auto pt-2 border-t border-purple-100/70">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-[#faf6f2] text-[#6f4627] font-bold border-b border-[#e5ded7]">
+                <tr className="bg-purple-50/70 text-purple-950 font-bold border-b border-purple-100">
                   <th className="py-2 px-3">Kategori Tamu</th>
                   <th className="py-2 px-3 text-right">Pihak Laki-laki</th>
                   <th className="py-2 px-3 text-right">Pihak Perempuan</th>
@@ -873,26 +879,26 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
                   <th className="py-2 px-3 text-center">Amplop</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#eeeeed]">
+              <tbody className="divide-y divide-purple-100/60">
                 {categoryData.map((row) => (
-                  <tr key={row.category} className="hover:bg-[#faf6f2]/60 transition-colors">
-                    <td className="py-2 px-3 font-semibold text-[#1a1c1c] flex items-center gap-1.5">
+                  <tr key={row.category} className="hover:bg-purple-50/40 transition-colors">
+                    <td className="py-2 px-3 font-semibold text-[#1e1b4b] flex items-center gap-1.5">
                       <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ backgroundColor: CATEGORY_COLORS[row.category] || '#8b5e3c' }}
+                        className="w-2.5 h-2.5 rounded-full shadow-2xs"
+                        style={{ backgroundColor: CATEGORY_COLORS[row.category] || '#ea580c' }}
                       ></span>
                       <span>{row.category}</span>
                     </td>
-                    <td className="py-2 px-3 text-right text-amber-900 font-medium">
+                    <td className="py-2 px-3 text-right text-orange-950 font-medium">
                       {formatRupiah(row.nominalLaki)}
                     </td>
-                    <td className="py-2 px-3 text-right text-yellow-900 font-medium">
+                    <td className="py-2 px-3 text-right text-purple-950 font-medium">
                       {formatRupiah(row.nominalPerempuan)}
                     </td>
-                    <td className="py-2 px-3 text-right font-bold text-[#6f4627]">
+                    <td className="py-2 px-3 text-right font-bold text-[#1e1b4b]">
                       {formatRupiah(row.totalNominal)}
                     </td>
-                    <td className="py-2 px-3 text-center text-[#51443c]">
+                    <td className="py-2 px-3 text-center text-gray-600">
                       {row.totalAmplop} amplop
                     </td>
                   </tr>
@@ -903,11 +909,13 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
         </div>
 
         {/* Side Donut Chart: Komposisi Pihak Mempelai (4 Cols) */}
-        <div className="lg:col-span-4 bg-white p-5 md:p-6 rounded-xl border border-[#d5c3b8] shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 glass-panel p-5 md:p-6 rounded-2xl border border-white/80 shadow-md space-y-4 flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 border-b border-[#eeeeed] pb-3.5">
-              <PieIcon className="w-4 h-4 text-[#8b5e3c]" />
-              <h4 className="font-serif-luxury text-lg font-bold text-[#6f4627]">
+            <div className="flex items-center gap-2 border-b border-purple-100/70 pb-3.5">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-orange-500 to-purple-600 text-white flex items-center justify-center shadow-xs">
+                <PieIcon className="w-3.5 h-3.5" />
+              </div>
+              <h4 className="font-serif-luxury text-lg font-bold text-[#1e1b4b]">
                 Proporsi Donasi Pihak
               </h4>
             </div>
@@ -936,46 +944,46 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
               </ResponsiveContainer>
               {/* Inner Center Metric */}
               <div className="absolute flex flex-col items-center justify-center pointer-events-none text-center">
-                <span className="text-[10px] uppercase font-bold text-[#51443c]">Total Dana</span>
-                <span className="text-sm font-bold text-[#6f4627]">
+                <span className="text-[10px] uppercase font-bold text-gray-500">Total Dana</span>
+                <span className="text-sm font-black text-purple-900">
                   {formatRupiah(totalsByParty.grandTotalCash)}
                 </span>
               </div>
             </div>
 
             {/* Side Legends & Percentages */}
-            <div className="space-y-2.5 pt-2 border-t border-[#eeeeed] text-xs">
-              <div className="p-3 bg-amber-50/70 border border-amber-200/90 rounded-xl space-y-1">
+            <div className="space-y-2.5 pt-2 border-t border-purple-100/70 text-xs">
+              <div className="p-3 bg-orange-50/80 border border-orange-200/90 rounded-xl space-y-1 shadow-2xs">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 font-bold text-amber-950">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#8b5e3c]"></span>
+                  <div className="flex items-center gap-1.5 font-bold text-orange-950">
+                    <span className="w-2.5 h-2.5 rounded-full bg-orange-600 shadow-2xs"></span>
                     <span>Pihak Laki-laki</span>
                   </div>
-                  <span className="text-xs font-bold text-amber-950">{malePercent}%</span>
+                  <span className="text-xs font-bold text-orange-950">{malePercent}%</span>
                 </div>
-                <div className="flex items-center justify-between text-amber-900/90 text-[11px]">
+                <div className="flex items-center justify-between text-orange-900/90 text-[11px]">
                   <span>Nominal Terhitung:</span>
                   <span className="font-bold">{formatRupiah(totalsByParty.totalLakiCash)}</span>
                 </div>
-                <div className="flex items-center justify-between text-amber-900/80 text-[11px]">
+                <div className="flex items-center justify-between text-orange-900/80 text-[11px]">
                   <span>Total Amplop Fisik:</span>
                   <span>{totalsByParty.totalLakiEnvelopes} Amplop</span>
                 </div>
               </div>
 
-              <div className="p-3 bg-yellow-50/70 border border-yellow-200/90 rounded-xl space-y-1">
+              <div className="p-3 bg-purple-50/80 border border-purple-200/90 rounded-xl space-y-1 shadow-2xs">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 font-bold text-yellow-950">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#c27803]"></span>
+                  <div className="flex items-center gap-1.5 font-bold text-purple-950">
+                    <span className="w-2.5 h-2.5 rounded-full bg-purple-600 shadow-2xs"></span>
                     <span>Pihak Perempuan</span>
                   </div>
-                  <span className="text-xs font-bold text-yellow-950">{femalePercent}%</span>
+                  <span className="text-xs font-bold text-purple-950">{femalePercent}%</span>
                 </div>
-                <div className="flex items-center justify-between text-yellow-900/90 text-[11px]">
+                <div className="flex items-center justify-between text-purple-900/90 text-[11px]">
                   <span>Nominal Terhitung:</span>
                   <span className="font-bold">{formatRupiah(totalsByParty.totalPerempuanCash)}</span>
                 </div>
-                <div className="flex items-center justify-between text-yellow-900/80 text-[11px]">
+                <div className="flex items-center justify-between text-purple-900/80 text-[11px]">
                   <span>Total Amplop Fisik:</span>
                   <span>{totalsByParty.totalPerempuanEnvelopes} Amplop</span>
                 </div>
@@ -984,7 +992,7 @@ export const AnalyticsChartsSection: React.FC<AnalyticsChartsSectionProps> = ({
           </div>
 
           {/* Quick Notice */}
-          <div className="p-3 bg-[#faf6f2] border border-[#d5c3b8]/70 rounded-xl text-[11px] text-[#51443c] flex items-start gap-2">
+          <div className="p-3 bg-white/80 backdrop-blur-md border border-purple-100 rounded-xl text-[11px] text-gray-600 flex items-start gap-2 shadow-2xs">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <p>
               Data terintegrasi secara otomatis dengan setiap penambahan tamu baru dan penghitungan

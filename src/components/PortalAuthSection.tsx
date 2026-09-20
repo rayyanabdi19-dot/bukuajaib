@@ -396,7 +396,7 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
           </div>
 
           {/* TAB SWITCHER: MASUK vs DAFTAR */}
-          <div className="flex rounded-xl bg-slate-100 p-1 mb-5 text-xs font-semibold text-slate-600">
+          <div className="flex rounded-xl bg-purple-50/60 border border-purple-100/60 p-1 mb-5 text-xs font-semibold text-purple-950">
             <button
               type="button"
               onClick={() => {
@@ -406,8 +406,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               }}
               className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 authMode === 'login'
-                  ? 'bg-white text-[#b59265] shadow-xs font-bold'
-                  : 'hover:text-slate-900'
+                  ? 'bg-white text-orange-600 shadow-xs font-bold'
+                  : 'hover:text-purple-700'
               }`}
             >
               <LogIn className="w-3.5 h-3.5" />
@@ -422,8 +422,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               }}
               className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 authMode === 'register'
-                  ? 'bg-white text-[#b59265] shadow-xs font-bold'
-                  : 'hover:text-slate-900'
+                  ? 'bg-white text-purple-600 shadow-xs font-bold'
+                  : 'hover:text-purple-700'
               }`}
             >
               <UserPlus className="w-3.5 h-3.5" />
@@ -462,8 +462,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
           {authMode === 'login' && (
             <form onSubmit={handleLoginSubmit} className="space-y-3.5">
               {/* Field 1: Username */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-4 py-3 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <User className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-4 py-3 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <User className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="login-username-input"
                   type="text"
@@ -477,8 +477,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               </div>
 
               {/* Field 2: Password */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-4 py-3 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <Lock className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-4 py-3 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <Lock className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="login-password-input"
                   type={showLoginPassword ? 'text' : 'password'}
@@ -503,12 +503,12 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
                 </button>
               </div>
 
-              {/* Submit Button (Warm Golden Bronze) */}
+              {/* Submit Button (Orange & Purple Gradient) */}
               <button
                 id="btn-main-login"
                 type="submit"
                 disabled={isAuthLoading}
-                className="w-full mt-2 py-3 px-6 rounded-xl bg-[#b59265] hover:bg-[#a48154] active:scale-[0.99] text-white font-medium text-[15px] shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
+                className="w-full mt-2 py-3 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 active:scale-[0.99] text-white font-medium text-[15px] shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
               >
                 {isAuthLoading ? (
                   <>
@@ -529,8 +529,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
           {authMode === 'register' && (
             <form onSubmit={handleRegisterSubmit} className="space-y-3">
               {/* Field 1: Nama Lengkap */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <User className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <User className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="register-name-input"
                   type="text"
@@ -543,7 +543,7 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               </div>
 
               {/* Field 2: Username */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
                 <span className="text-xs font-bold text-slate-400 mr-1 select-none">@</span>
                 <input
                   id="register-username-input"
@@ -558,8 +558,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               </div>
 
               {/* Field 3: Email */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <Mail className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <Mail className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="register-email-input"
                   type="email"
@@ -572,8 +572,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               </div>
 
               {/* Field 4: Password */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <Lock className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <Lock className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="register-password-input"
                   type={showRegisterPassword ? 'text' : 'password'}
@@ -600,8 +600,8 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
               </div>
 
               {/* Field 5: WhatsApp Phone */}
-              <div className="relative flex items-center border border-slate-200 hover:border-slate-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-[#b59265] focus-within:ring-2 focus-within:ring-[#b59265]/20 transition-all shadow-2xs">
-                <Phone className="w-4 h-4 text-slate-400 shrink-0 stroke-[1.8]" />
+              <div className="relative flex items-center border border-purple-200/80 hover:border-purple-300 rounded-xl px-3.5 py-2.5 bg-white focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-400/20 transition-all shadow-2xs">
+                <Phone className="w-4 h-4 text-purple-400 shrink-0 stroke-[1.8]" />
                 <input
                   id="register-phone-input"
                   type="tel"
@@ -614,26 +614,26 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
 
               {/* Role Selection */}
               <div className="flex items-center gap-2 pt-1 text-xs text-slate-600">
-                <span className="font-semibold text-slate-700">Peran:</span>
-                <label className="flex items-center gap-1.5 cursor-pointer">
+                <span className="font-semibold text-purple-950">Peran:</span>
+                <label className="flex items-center gap-1.5 cursor-pointer text-purple-950">
                   <input
                     type="radio"
                     name="registerRole"
                     value="admin"
                     checked={registerRole === 'admin'}
                     onChange={() => setRegisterRole('admin')}
-                    className="accent-[#b59265]"
+                    className="accent-purple-600"
                   />
                   <span>Admin Acara</span>
                 </label>
-                <label className="flex items-center gap-1.5 cursor-pointer ml-2">
+                <label className="flex items-center gap-1.5 cursor-pointer ml-2 text-purple-950">
                   <input
                     type="radio"
                     name="registerRole"
                     value="receptionist"
                     checked={registerRole === 'receptionist'}
                     onChange={() => setRegisterRole('receptionist')}
-                    className="accent-[#b59265]"
+                    className="accent-purple-600"
                   />
                   <span>Petugas Meja Tamu</span>
                 </label>
@@ -644,7 +644,7 @@ export const PortalAuthSection: React.FC<PortalAuthSectionProps> = ({
                 id="btn-main-register"
                 type="submit"
                 disabled={isAuthLoading}
-                className="w-full mt-2 py-3 px-6 rounded-xl bg-[#b59265] hover:bg-[#a48154] active:scale-[0.99] text-white font-medium text-[15px] shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
+                className="w-full mt-2 py-3 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 active:scale-[0.99] text-white font-medium text-[15px] shadow-sm hover:shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-70"
               >
                 {isAuthLoading ? (
                   <>

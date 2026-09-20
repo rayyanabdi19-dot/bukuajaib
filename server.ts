@@ -44,18 +44,18 @@ interface DatabaseSchema {
 // Default initial data for admin demo account
 const DEFAULT_ADMIN_ID = 'usr_admin_default';
 const initialEvent = {
-  coupleTitle: 'Budi & Siti Wedding',
-  fullTitle: 'BUDI & SITI — Resepsi Siang & Malam',
-  groomName: 'Budi Pratama, S.T.',
-  brideName: 'Siti Nurhaliza, S.E.',
+  coupleTitle: 'Buku Tamu Resepsi',
+  fullTitle: 'Resepsi Pernikahan',
+  groomName: 'Pengantin Pria',
+  brideName: 'Pengantin Wanita',
   dateStr: 'Minggu, 20 September 2026',
   timeStr: '10:00 - 21:00 WIB',
-  location: 'Gedung Serbaguna, Jakarta',
-  hall: 'Ballroom Lantai 2',
-  targetGuests: 600,
-  souvenirStock: 650,
+  location: 'Gedung Resepsi',
+  hall: 'Ballroom Utama',
+  targetGuests: 500,
+  souvenirStock: 500,
   serverSyncIntervalSeconds: 0.2,
-  version: 'v.1.0.2 (Build 2026.09-release)',
+  version: 'v.1.0.0 (Production)',
 };
 
 function loadDatabase(): DatabaseSchema {

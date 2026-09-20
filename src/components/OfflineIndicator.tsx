@@ -44,7 +44,7 @@ export const OfflineIndicator: React.FC = () => {
         </p>
         <div className="flex items-center gap-2 mt-2 pt-2 border-t border-white/10 text-[11px] text-emerald-300 font-medium">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span>Data tersimpan aman di peramban ini & akan sinkron saat online.</span>
+          <span>Autosave IndexedDB aktif setiap 10 detik. Data tamu & amplop aman tersimpan lokal.</span>
         </div>
       </div>
 

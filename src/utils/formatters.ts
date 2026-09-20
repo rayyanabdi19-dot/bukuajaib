@@ -17,7 +17,7 @@ export function getCurrentTimeWIB(): string {
   return `${hours}:${minutes} WIB`;
 }
 
-export function exportToCSV(guests: Guest[], filename = 'Buku_Tamu_Budi_Siti.csv'): void {
+export function exportToCSV(guests: Guest[], filename = 'Buku_Tamu_Resepsi.csv'): void {
   const headers = [
     'No',
     'Kode Tamu',
@@ -234,7 +234,7 @@ export function printBeritaAcara(
     <div class="sig-col">
       <p>Saksi Keluarga Pengantin Pria,</p>
       <div class="sig-space"></div>
-      <p><strong>( .................................................... )</strong><br/>Keluarga Budi Pratama</p>
+      <p><strong>( .................................................... )</strong><br/>Keluarga Pengantin Pria</p>
     </div>
     <div class="sig-col">
       <p>Koordinator Wedding Organizer,</p>
@@ -244,7 +244,7 @@ export function printBeritaAcara(
     <div class="sig-col">
       <p>Saksi Keluarga Pengantin Wanita,</p>
       <div class="sig-space"></div>
-      <p><strong>( .................................................... )</strong><br/>Keluarga Siti Nurhaliza</p>
+      <p><strong>( .................................................... )</strong><br/>Keluarga Pengantin Wanita</p>
     </div>
   </div>
 

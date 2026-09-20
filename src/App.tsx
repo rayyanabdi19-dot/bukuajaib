@@ -233,10 +233,11 @@ export default function App() {
       updatedLogs: ActivityLog[],
       updatedEventInfo: WeddingEventInfo
     ) => {
-      if (!userSession.id) return;
+      const uid = userSession.id?.trim();
+      if (!uid || uid === 'undefined' || uid === 'null') return;
       try {
         setSyncStatus('syncing');
-        await fetch(`/api/user/data/${userSession.id}`, {
+        const res = await fetch(`/api/user/data/${encodeURIComponent(uid)}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -245,9 +246,11 @@ export default function App() {
             eventInfo: updatedEventInfo,
           }),
         });
-        setTimeout(() => setSyncStatus('connected'), 300);
+        if (res.ok) {
+          setTimeout(() => setSyncStatus('connected'), 300);
+        }
       } catch (err) {
-        console.error('Broadcast sync error:', err);
+        console.warn('Broadcast sync notice:', err);
         setSyncStatus('offline');
       }
     },
@@ -256,14 +259,22 @@ export default function App() {
 
   // Synchronize with server on user session change + SSE stream
   useEffect(() => {
-    if (!userSession.id) return;
-    const uid = userSession.id;
+    const rawId = userSession.id;
+    if (!rawId || typeof rawId !== 'string') return;
+    const uid = rawId.trim();
+    if (!uid || uid === 'undefined' || uid === 'null') return;
 
     // 1. Initial fetch of private user data from server
-    fetch(`/api/user/data/${uid}`)
-      .then((res) => res.json())
+    fetch(`/api/user/data/${encodeURIComponent(uid)}`)
+      .then(async (res) => {
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('application/json')) {
+          return null;
+        }
+        return res.json();
+      })
       .then((res) => {
-        if (res.success && res.data) {
+        if (res && res.success && res.data) {
           if (Array.isArray(res.data.guests) && res.data.guests.length > 0) {
             setGuests(res.data.guests);
           }
@@ -275,12 +286,14 @@ export default function App() {
           }
         }
       })
-      .catch((err) => console.error('Error fetching user data on mount:', err));
+      .catch((err) => {
+        console.warn('Notice fetching user data on mount (using local state):', err?.message || err);
+      });
 
     // 2. Server-Sent Events (SSE) for Real-Time 2-Device Synchronization
     let sse: EventSource | null = null;
     try {
-      sse = new EventSource(`/api/sync/stream/${uid}`);
+      sse = new EventSource(`/api/sync/stream/${encodeURIComponent(uid)}`);
       sse.onopen = () => {
         setSyncStatus('connected');
       };
@@ -313,10 +326,16 @@ export default function App() {
 
     // 3. Fallback polling every 4 seconds to guarantee sync between 2 devices even if network pauses
     const pollInterval = setInterval(() => {
-      fetch(`/api/user/data/${uid}`)
-        .then((r) => r.json())
+      fetch(`/api/user/data/${encodeURIComponent(uid)}`)
+        .then(async (r) => {
+          const contentType = r.headers.get('content-type') || '';
+          if (!r.ok || !contentType.includes('application/json')) {
+            return null;
+          }
+          return r.json();
+        })
         .then((res) => {
-          if (res.success && res.data) {
+          if (res && res.success && res.data) {
             if (Array.isArray(res.data.guests)) {
               setGuests((current) => {
                 if (JSON.stringify(current) !== JSON.stringify(res.data.guests)) {

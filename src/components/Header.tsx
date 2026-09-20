@@ -100,8 +100,6 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, [sideMenuOpen]);
 
-  const currentNavItem = NAV_ITEMS.find((item) => item.id === activeNav) || NAV_ITEMS[0];
-
   const handleNavSelect = (navId: string) => {
     setActiveNav(navId);
     // Buka tutup otomatis: segera tutup side menu setelah item dipilih
@@ -119,7 +117,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setSideMenuOpen((prev) => !prev)}
               className="px-2.5 sm:px-3 py-1.5 -ml-1 text-[#51443c] hover:text-[#6f4627] hover:bg-[#faf6f2] rounded-xl transition-all border border-[#d5c3b8]/80 flex items-center gap-2 shrink-0 active:scale-95 shadow-2xs group cursor-pointer"
               aria-label={sideMenuOpen ? 'Tutup Menu Navigasi' : 'Buka Menu Navigasi'}
-              title="Buka Menu Navigasi (Side Menu)"
+              title="Buka Menu Navigasi"
               type="button"
               id="hamburger-menu-btn"
             >
@@ -152,21 +150,8 @@ export const Header: React.FC<HeaderProps> = ({
                   <span className="hidden sm:inline">Live Event Aktif</span>
                   <span className="sm:hidden">Live</span>
                 </span>
-                <span className="hidden md:inline text-[10px] text-[#8c7355]">• Navigasi Side Menu</span>
               </div>
             </div>
-
-            {/* Current Active Page Pill Button (Click to toggle side menu) */}
-            <button
-              onClick={() => setSideMenuOpen(true)}
-              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#faf6f2] hover:bg-[#ede5df] border border-[#d5c3b8]/70 text-xs font-semibold text-[#6f4627] transition-all shadow-2xs group shrink-0 cursor-pointer"
-              title="Klik untuk membuka menu navigasi di Side Menu"
-              type="button"
-            >
-              <currentNavItem.icon className="w-3.5 h-3.5 text-[#8b5e3c] group-hover:scale-110 transition-transform" />
-              <span className="font-bold">{currentNavItem.label}</span>
-              <ChevronDown className="w-3 h-3 text-[#8c7355] group-hover:translate-y-0.5 transition-transform" />
-            </button>
           </div>
 
           {/* Right: Action Controls & Live Clock Widget */}
@@ -404,7 +389,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </h2>
                   <div className="flex items-center gap-1 mt-0.5 text-[10px] text-emerald-700 font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Side Menu Navigasi</span>
+                    <span>Resepsi Pernikahan</span>
                   </div>
                 </div>
               </div>

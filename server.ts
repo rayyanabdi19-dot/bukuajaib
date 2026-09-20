@@ -255,12 +255,43 @@ app.post('/api/auth/login', (req, res) => {
 });
 
 // 4. Get User Wedding Data
+app.get(['/api/user/data', '/api/user/data/'], (req, res) => {
+  res.status(400).json({ success: false, message: 'User ID is required' });
+});
+
 app.get('/api/user/data/:userId', (req, res) => {
   const { userId } = req.params;
-  const data = db.userData[userId];
+  if (!userId || userId === 'undefined' || userId === 'null') {
+    return res.status(400).json({ success: false, message: 'Invalid user ID' });
+  }
+
+  let data = db.userData[userId];
 
   if (!data) {
-    return res.status(404).json({ success: false, message: 'Data tidak ditemukan' });
+    const matchingUser = Object.values(db.users).find((u) => u.id === userId);
+    const userName = matchingUser ? matchingUser.name : 'Mempelai';
+    data = {
+      eventInfo: {
+        ...initialEvent,
+        coupleTitle: `Pernikahan ${userName}`,
+        groomName: userName,
+        brideName: 'Pasangan',
+      },
+      guests: [],
+      logs: [
+        {
+          id: `log-${Date.now()}`,
+          time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB',
+          message: `Sesi ${userName} aktif. Siap mencatat data tamu dan presensi.`,
+          type: 'update',
+          color: 'emerald',
+        },
+      ],
+      updatedAt: new Date().toISOString(),
+      revision: 1,
+    };
+    db.userData[userId] = data;
+    saveDatabase(db);
   }
 
   res.json({ success: true, data });
@@ -368,6 +399,11 @@ app.get('/api/sync/stream/:userId', (req, res) => {
       sseClients[userId] = sseClients[userId].filter((client) => client !== res);
     }
   });
+});
+
+// Catch-all for undefined /api/* routes so they NEVER fall through to Vite HTML
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ success: false, message: `API route ${req.method} ${req.path} not found` });
 });
 
 // ================= VITE INTEGRATION =================
